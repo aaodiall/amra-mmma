@@ -6,11 +6,21 @@ Ext.define("Lan.view.activityMain", {
         'Ext.Container',
         'Ext.MessageBox',
         'Ext.Panel',
+        'Ext.tab.Panel',
         'Ext.Toolbar',
-        'Ext.event.publisher.Dom'
+        'Ext.event.publisher.Dom',
+        'Ext.TitleBar'
     ],
     
     config: {
+        
+        tabBarPosition: 'top',
+      
+      tabBar : { // To center the tab in the tab bar
+        layout : {
+                    pack : 'center'
+                 } 
+      },
 	  
         fullscreen: true,
          
@@ -90,41 +100,21 @@ Ext.define("Lan.view.activityMain", {
           title: 'Autres activités',
           leaf: true,
           slideButton: {
-                selector: 'toolbar'
+                selector: 'titlebar'
             },
-            items: [
+            
+                items: [
       {
         xtype:'titlebar',
         docked:'top',
-        title:'Activity',
-        items:[
-            {
-                iconCls:'more',
-                iconMask:true,
-                align:'left'
-            },
-            {
-                iconCls:'search',
-                iconMask:true,
-                align:'right'
-            }
-        ]},
+        title:'Activity'
+        },
     
         {
-            title: 'Sport',
+            title: 'activityTab',
             iconCls: 'user', iconMask: true,
             style: 'background-color: #e17467; color: white',
-            xtype: 'sportactivity'
-        }, {
-            title: 'Cultural',
-            iconCls: 'bookmarks', iconMask: true,
-            style: 'background-color: #f6eb69',
-            xtype: 'culturalXtype'
-        }, {
-            title: 'Car-pooling',
-            iconCls: 'bookmarks', iconMask: true,
-            style: 'background-color: #f6ebaa',
-            xtype: 'carpoolingXtype'
+            xtype: 'activitytab'
         }]
          
         },

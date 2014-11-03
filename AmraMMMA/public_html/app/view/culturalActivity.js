@@ -1,6 +1,6 @@
 Ext.define("Lan.view.culturalActivity", {
     extend: 'Ext.form.Panel',
-    xtype: 'culturalXtype',
+    xtype: 'culturalactivity',
     config: {
           title: 'List',
           iconCls: 'bookmarks',
