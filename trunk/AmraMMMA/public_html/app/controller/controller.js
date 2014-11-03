@@ -3,11 +3,14 @@ Ext.define('Lan.controller.controller', {
 
     config: {
         refs: {
-            culturalactivityref: 'culturalactivity',
             sportactivityref: 'sportactivity',
+            culturalactivityref: 'culturalactivity',
             carpoolactivityref: 'carpoolactivity',
-            createactivityref: 'createactivity',
+            createsportactivityref: 'createsportactivity',
+            createculturalactivityref: 'createculturalactivity',
+            createcarpoolactivityref: 'createcarpoolactivity',            
             externallistref : 'externallist',
+            
             
             activitystoreref: {
                 selector: 'activitystore',
@@ -16,8 +19,14 @@ Ext.define('Lan.controller.controller', {
             }
         },
         control: {
-            'button[action=createActivityAction]': {
-               tap: 'createActivityButtonTap'
+            'button[action=createSportActivity]': {
+               tap: 'createSportActivityButtonTap'
+            },
+            'button[action=createCulturalActivity]': {
+               tap: 'createCulturalActivityButtonTap'
+            },
+            'button[action=createCarpoolActivity]': {
+               tap: 'createCarpoolActivityButtonTap'
             },
             sportactivity: {
                 itemtap: 'sportactivitytap'
@@ -41,16 +50,40 @@ Ext.define('Lan.controller.controller', {
     },
 
       
-    createActivityButtonTap: function() {  
+    createSportActivityButtonTap: function() {  
         // retrieve values from the ref to the create activity
-        var values = this.getCreateactivityref().getValues();
+        var values = this.getCreatesportactivityref().getValues();
         // create a model instance with those values
         var activity = Ext.create('Lan.model.activity',values);
         
         // add the model to the store if valid
         this.getActivitystoreref().add(values);
-        this.getCreateactivityref().reset();
-        Ext.Msg.alert('Created', 'Activity created !!');
+        this.getCreatesportactivityref().reset();
+        Ext.Msg.alert('Created', 'Sport activity created !!');
+    },
+    
+    createCulturalActivityButtonTap: function() {  
+        // retrieve values from the ref to the create activity
+        var values = this.getCreateculturalactivityref().getValues();
+        // create a model instance with those values
+        var activity = Ext.create('Lan.model.activity',values);
+        
+        // add the model to the store if valid
+        this.getActivitystoreref().add(values);
+        this.getCreateculturalactivityref().reset();
+        Ext.Msg.alert('Created', 'Cultural activity created !!');
+    },
+            
+    createCarpoolActivityButtonTap: function() {  
+        // retrieve values from the ref to the create activity
+        var values = this.getCreatecarpoolactivityref().getValues();
+        // create a model instance with those values
+        var activity = Ext.create('Lan.model.activity',values);
+        
+        // add the model to the store if valid
+        this.getActivitystoreref().add(values);
+        this.getCreatecarpoolactivityref().reset();
+        Ext.Msg.alert('Created', 'Carpool Activity created !!');
     },
       
     sportactivitytap: function (dataview, index, target, record, e, eOpts) {
