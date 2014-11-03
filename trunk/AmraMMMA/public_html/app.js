@@ -8,7 +8,7 @@ Ext.application({
     
     // MVC components are specified
     models: ['activity'],
-    views: ['activityMain','culturalActivity','sportActivity','carPoolActivity','createActivity'],
+    views: ['activityMain','activityTab','culturalActivity','sportActivity','carPoolActivity','createActivity'],
     controllers: ['controller'],
     stores: ['activityStore'],
 

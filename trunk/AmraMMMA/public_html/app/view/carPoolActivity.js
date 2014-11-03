@@ -1,6 +1,6 @@
 Ext.define("Lan.view.carPoolActivity", {
     extend: 'Ext.dataview.List',
-    xtype: 'carpoolingXtype',
+    xtype: 'carpoolingactivity',
     config: {
           title: 'List',
           iconCls: 'bookmarks',
