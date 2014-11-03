@@ -131,7 +131,7 @@ Ext.define("Lan.view.activityMain", {
                 title: 'Sport',
                 docked: 'top'
             },{
-                xtype: 'createactivity'
+                xtype: 'createsportactivity'
                
             }] 
     },
@@ -146,22 +146,22 @@ Ext.define("Lan.view.activityMain", {
                 title: 'Culturelle',
                 docked: 'top'
             },{
-                xtype: 'createactivity'
+                xtype: 'createculturalactivity'
                
             }]
     },
     {
-         title: 'Covoitrage',
+         title: 'Covoiturage',
         leaf: true,
         slideButton: {
                 selector: 'toolbar'
             },
             items: [{
                 xtype: 'toolbar',
-                title: 'Covoitrage',
+                title: 'Covoiturage',
                 docked: 'top'
             },{
-                xtype: 'createactivity'
+                xtype: 'createcarpoolactivity'
                
             }] 
           }]
