@@ -12,27 +12,27 @@ Ext.define("Lan.view.createCulturalActivity", {
           },
           {
             xtype: 'textfield',
-            name: 'organisateur',
+            name: 'id_user',
             label: 'Nom de l\'organisateur'
          },
          {
             xtype: 'textfield',
-            name: 'heure_debut',
+            name: 'start_time',
             label: 'Heure de debut de l\'activite'
         },
         {
             xtype: 'textfield',
-            name: 'heure_fin',
+            name: 'stop_time',
             label: 'Heure de fin de l\'activite'
         },
         {
             xtype: 'textfield',
-            name: 'lieu_rdv',
+            name: 'location',
             label: 'Lieu de rendez-vous'
         },
         {
             xtype: 'numberfield',
-            name: 'nombre_max',
+            name: 'max_number',
             label: 'Nombre de personne maximal'
         },
         {

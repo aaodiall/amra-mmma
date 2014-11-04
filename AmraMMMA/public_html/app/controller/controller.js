@@ -88,17 +88,17 @@ Ext.define('Lan.controller.controller', {
       
     sportactivitytap: function (dataview, index, target, record, e, eOpts) {
               // retrieve the name of the selected record of the list
-              var name = record.get('organisateur');
+              var name = record.get('id_user');
               Ext.Msg.confirm('Voir details de l\'activite de ', name+'?', 
                    function (answer) {
                      if (answer==='yes')
                       {
                           // see detail
-                          Ext.Msg.alert('Activity detail', 'Activite cree par : '+record.get('organisateur')+
-                                                           '<br>Heure de debut : '+record.get('heure_debut')+
-                                                           '<br>Heure de fin : '+record.get('heure_fin')+
-                                                           '<br>Lieu : '+record.get('lieu_rdv')+
-                                                           '<br>Nombre de personnes max : '+record.get('nombre_max')+
+                          Ext.Msg.alert('Activity detail', 'Activite cree par : '+record.get('id_user')+
+                                                           '<br>Heure de debut : '+record.get('start_time')+
+                                                           '<br>Heure de fin : '+record.get('stop_time')+
+                                                           '<br>Lieu : '+record.get('location')+
+                                                           '<br>Nombre de personnes max : '+record.get('max_number')+
                                                            '<br>Description : '+record.get('description'));
                        }
                       },this);
