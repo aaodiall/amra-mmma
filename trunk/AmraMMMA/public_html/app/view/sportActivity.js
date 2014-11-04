@@ -5,7 +5,7 @@ Ext.define("Lan.view.sportActivity", {
           title: 'List',
           iconCls: 'bookmarks',
           itemTpl: '<div class="user">\n\
-                        Organisateur: <strong>{organisateur}</strong>\n\
+                        Organisateur: <strong>{id_user}</strong>\n\
                         <br>Lieu de l\'activite :{lieu_rdv}\n\
                     </div>'
         }
