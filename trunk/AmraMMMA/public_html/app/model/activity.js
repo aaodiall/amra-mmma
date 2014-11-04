@@ -7,12 +7,6 @@ Ext.define('Lan.model.activity', {
         // specify universal unique id policy
         identifier: 'uuid',
         fields: [
-           /*{name: 'organisateur', type: 'string'},
-            /*{name: 'heure_debut', type: 'string'},
-            {name: 'heure_fin', type: 'string'},
-            {name: 'lieu_rdv', type: 'string'},
-            {name: 'nombre_max', type: 'int'},
-            {name: 'description', type: 'string'},*/
            {name:'id', type:'auto', isUnique: true},
            {name:'date_activity', type:'string'},
            {name:'start_time', type:'string'},
