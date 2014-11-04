@@ -121,14 +121,14 @@ Ext.define("Lan.view.activityMain", {
         {
           title: 'Créer une activité',
           items:[{
-            title: 'Sport',      
+            title: 'Créer une activité sportive',      
           leaf: true,
           slideButton: {
                 selector: 'toolbar'
             },
             items: [{
                 xtype: 'toolbar',
-                title: 'Sport',
+                title: 'Créer une activité sportive',
                 docked: 'top'
             },{
                 xtype: 'createsportactivity'
@@ -136,14 +136,14 @@ Ext.define("Lan.view.activityMain", {
             }] 
     },
     {
-         title: 'Culturelle',
+         title: 'Créer une activité culturelle',
         leaf: true,
         slideButton: {
                 selector: 'toolbar'
             },
             items: [{
                 xtype: 'toolbar',
-                title: 'Culturelle',
+                title: 'Créer une activité culturelle',
                 docked: 'top'
             },{
                 xtype: 'createculturalactivity'
@@ -151,14 +151,14 @@ Ext.define("Lan.view.activityMain", {
             }]
     },
     {
-         title: 'Covoiturage',
+         title: 'Proposer un trajet',
         leaf: true,
         slideButton: {
                 selector: 'toolbar'
             },
             items: [{
                 xtype: 'toolbar',
-                title: 'Covoiturage',
+                title: 'Proposer un trajet',
                 docked: 'top'
             },{
                 xtype: 'createcarpoolactivity'

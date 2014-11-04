@@ -8,7 +8,7 @@ Ext.define('Lan.model.activity', {
         identifier: 'uuid',
         fields: [
            {name:'id', type:'auto', isUnique: true},
-           {name:'date_activity', type:'string'},
+           {name:'date_activity', type:'Date'},
            {name:'start_time', type:'string'},
            {name:'stop_time', type:'string'},
            {name:'meeting_location', type:'string'},

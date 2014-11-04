@@ -6,10 +6,10 @@ Ext.define("Lan.view.createCarpoolActivity", {
           iconCls: 'user',
           scrollable: 'vertical',
           items: [
-          {
+          /*{
             xtype: 'toolbar',
             title: 'Créer une activité'
-          },
+          },*/
           {
             xtype: 'textfield',
             name: 'id_user',
@@ -17,28 +17,48 @@ Ext.define("Lan.view.createCarpoolActivity", {
          },
          {
             xtype: 'textfield',
+            name: 'date_activity',
+            label: 'Date'
+        },
+        {
+            xtype: 'textfield',
+            name: 'departure_location',
+            label: 'Lieu de départ'
+        },
+         {
+            xtype: 'textfield',
             name: 'start_time',
-            label: 'Heure de debut de l\'activite'
+            label: 'Heure de départ'
+        },
+        {
+            xtype: 'textfield',
+            name: 'arrival_location',
+            label: 'Lieu d\'arrivée'
         },
         {
             xtype: 'textfield',
             name: 'stop_time',
-            label: 'Heure de fin de l\'activite'
+            label: 'Heure d\'arrivée'
         },
         {
             xtype: 'textfield',
-            name: 'location',
+            name: 'meeting_location',
             label: 'Lieu de rendez-vous'
         },
         {
             xtype: 'numberfield',
             name: 'max_number',
-            label: 'Nombre de personne maximal'
+            label: 'Nombre de places disponibles'
         },
         {
-            xtype: 'textfield',
+            xtype: 'numberfield',
+            name: 'cost',
+            label: 'Tarif par place'
+        },
+        {
+            xtype: 'textareafield',
             name: 'description',
-            label: 'Decription de l\'activite'
+            label: 'Description'
         },
        
         

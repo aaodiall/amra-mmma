@@ -10,7 +10,7 @@ Ext.define('Lan.controller.controller', {
             createculturalactivityref: 'createculturalactivity',
             createcarpoolactivityref: 'createcarpoolactivity',            
             externallistref : 'externallist',
-            
+                
             
             activitystoreref: {
                 selector: 'activitystore',
@@ -102,5 +102,6 @@ Ext.define('Lan.controller.controller', {
                                                            '<br>Description : '+record.get('description'));
                        }
                       },this);
-            }
+    }
+    
 });
