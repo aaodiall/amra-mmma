@@ -80,10 +80,10 @@ Ext.define('Lan.view.activityMain', {
           title: 'Autres activités',
           leaf: true,
           slideButton: {
-                selector: 'toolbar'
+                selector: 'titlebar'
             },
             
-                items: [
+          items: [
       {
         xtype:'titlebar',
         docked:'top',
