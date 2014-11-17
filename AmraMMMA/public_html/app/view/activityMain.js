@@ -1,4 +1,4 @@
-Ext.define("Lan.view.activityMain", {
+Ext.define('Lan.view.activityMain', {
     extend: 'Ext.ux.slidenavigation.collapsible.View',
 	xtype: 'maincontainer',
     
@@ -72,7 +72,8 @@ Ext.define("Lan.view.activityMain", {
                 title: 'Mes Activités',
                 docked: 'top'
             },{
-                xtype: 'sportactivity'
+                xtype: 'home'
+               
             }]
          
         },{
@@ -82,33 +83,21 @@ Ext.define("Lan.view.activityMain", {
                 selector: 'toolbar'
             },
             
-        items: [{
-                xtype:'toolbar',
-                title: 'Autres activités',
-                docked:'top'
-            },{
-                xtype:'tabpanel',
-                title: 'Onglets des autres activités',
-                tabBar : { // To center the tab in the tab bar
-                    layout : {
-                       pack : 'center'
-                    } 
-                },
-                items:[
-                {
-                    title: 'Sport',
-                    style: 'background-color: #f6eb69; color: black',
-                    xtype: 'sportactivity'
-                }, {
-                    title: 'Cultural',
-                    style: 'background-color: #f6ebcc',
-                }, {
-                    title: 'Car-pooling',
-                    style: 'background-color: #e17467; color: black',
-                }]
-             },/*{
-                   xtype:'sportactivity'
-             }*/]},
+                items: [
+      {
+        xtype:'titlebar',
+        docked:'top',
+        title:'Activités'
+        },
+    
+        {
+            title: 'activityTab',
+            iconCls: 'user', iconMask: true,
+           
+            xtype: 'activitytab'
+        }]
+         
+        },
         {
           title: 'Créer une activité',
           items:[{
@@ -184,10 +173,10 @@ Ext.define("Lan.view.activityMain", {
             },
             items: [{
                 xtype: 'toolbar',
-                title: 'Item 1',
+                title: 'login',
                 docked: 'top'
             },{
-                xtype: 'panel'
+                xtype: 'login'
                
             }]
          
