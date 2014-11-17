@@ -13,17 +13,8 @@ Ext.define("Lan.view.activityMain", {
     ],
     
     config: {
-        
-        tabBarPosition: 'top',
-      
-      tabBar : { // To center the tab in the tab bar
-        layout : {
-                    pack : 'center'
-                 } 
-      },
-	  
-        fullscreen: true,
-         
+       
+        id: 'mainId',
         /**
          *  Any component within the container with an 'x-toolbar' class
          *  will be draggable.  To disable draggin all together, set this
@@ -55,19 +46,7 @@ Ext.define("Lan.view.activityMain", {
                     width: 200
                 }
                 
-                /**
-                 *  Here's an example of how to add a different type of
-                 *  component into the toolbar of the list.
-                 */
-                /*
-                items: [{
-                    xtype: 'searchfield',
-                    placeHolder: 'search',
-                    width: 180
-                }]
-                */
             }]
-            
         },
         
         /**
@@ -79,45 +58,57 @@ Ext.define("Lan.view.activityMain", {
             xtype: 'container'
         },
         
+        
         items: [
         {
           title: 'Mes activités',
           leaf: true,
           slideButton: {
                 selector: 'toolbar'
-            },
-            items: [{
+          },
+          
+          items: [{
                 xtype: 'toolbar',
                 title: 'Mes Activités',
                 docked: 'top'
             },{
-                xtype: 'panel'
-               
+                xtype: 'sportactivity'
             }]
          
-        },
-        {
+        },{
           title: 'Autres activités',
           leaf: true,
           slideButton: {
-                selector: 'titlebar'
+                selector: 'toolbar'
             },
             
-                items: [
-      {
-        xtype:'titlebar',
-        docked:'top',
-        title:'Activity'
-        },
-    
-        {
-            title: 'activityTab',
-            iconCls: 'user', iconMask: true,
-            style: 'background-color: #e17467; color: white',
-            xtype: 'activitytab'
-        }]
-         
-        },
+        items: [{
+                xtype:'toolbar',
+                title: 'Autres activités',
+                docked:'top'
+            },{
+                xtype:'tabpanel',
+                title: 'Onglets des autres activités',
+                tabBar : { // To center the tab in the tab bar
+                    layout : {
+                       pack : 'center'
+                    } 
+                },
+                items:[
+                {
+                    title: 'Sport',
+                    style: 'background-color: #f6eb69; color: black',
+                    xtype: 'sportactivity'
+                }, {
+                    title: 'Cultural',
+                    style: 'background-color: #f6ebcc',
+                }, {
+                    title: 'Car-pooling',
+                    style: 'background-color: #e17467; color: black',
+                }]
+             },/*{
+                   xtype:'sportactivity'
+             }*/]},
         {
           title: 'Créer une activité',
           items:[{
@@ -202,5 +193,16 @@ Ext.define("Lan.view.activityMain", {
          
         }
     ]
-    }
+    },
+    
+    initialize: function(){
+           this.callParent();
+
+           //  record is visible
+           console.log("Dans le activityMain : ");
+           //if (!Ext.getComponent('sportItemId')){
+           //     console.log("Dans le IF du activityMain");
+                Ext.create('Lan.view.sportActivity');
+           // }   
+         }
 });
