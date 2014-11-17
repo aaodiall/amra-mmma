@@ -1,0 +1,30 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Nov 4, 2014, 5:05:18 PM
+    Author     : alpha
+*/
+
+.myPicture {
+        position: relative;
+         margin-left: 10px;
+         margin-right: 10px;
+            float: left;
+        }
+.myContent {
+ margin-bottom: 5px;
+}
+.myPlaces {
+    position: relative;
+         margin-left: 10px;
+         margin-right: 10%;
+            float: right;
+        }
+        .marge{
+           margin-right: 10%;
+           float: right;
+           
+        }

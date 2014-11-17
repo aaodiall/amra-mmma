@@ -11,6 +11,10 @@ Ext.define('Lan.controller.controller', {
             carpoolactivityref: 'carpoolactivity',
             detailsportactivityref: 'detailsportactivity',
             externallistref : 'externallist',
+            mysportactivityref : 'mysportactivity',
+            myculturalactivityref : 'myculturalactivity',
+            mycarpoolactivityref : 'mycarpoolactivity',
+            
                 
             
             activitystoreref: {
@@ -39,6 +43,15 @@ Ext.define('Lan.controller.controller', {
             
             sportactivity: {
                itemtap: 'sportactivitytap'
+            },
+            mysportactivity: {
+               itemtap: 'mysportactivitytap'
+            },
+            myculturalactivity: {
+               itemtap: 'myculturalactivitytap'
+            },
+            mycarpoolactivity: {
+               itemtap: 'mycarpoolactivitytap'
             }
         }
     },
@@ -105,6 +118,23 @@ Ext.define('Lan.controller.controller', {
     },
       
     sportactivitytap: function (dataview, index, target, record, e, eOpts) {
+       
+        Ext.Viewport.animateActiveItem({ xtype:'detailsportactivity'},{type:'slide'});
+        this.getDetailsportactivityref().setValues(record);
+        
+        console.log("L'organisateur : "+record.getData().id_user);
+        
+        //We need to keep the same order in the view !
+        this.getDetailsportactivityref().getComponent('iduser').setHtml(record.getData().id_user);
+        this.getDetailsportactivityref().getComponent('starttime').setHtml(record.getData().start_time);
+        this.getDetailsportactivityref().getComponent('stoptime').setHtml(record.getData().stop_time);
+        this.getDetailsportactivityref().getComponent('location').setHtml(record.getData().location);
+        this.getDetailsportactivityref().getComponent('maxnumber').setHtml(record.getData().max_number);
+        this.getDetailsportactivityref().getComponent('description').setHtml(record.getData().description);
+
+},
+
+    mysportactivitytap: function (dataview, index, target, record, e, eOpts) {
        
         Ext.Viewport.animateActiveItem({ xtype:'detailsportactivity'},{type:'slide'});
         this.getDetailsportactivityref().setValues(record);

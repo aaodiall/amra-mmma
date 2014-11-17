@@ -8,9 +8,8 @@ Ext.application({
     
     // MVC components are specified
     models: ['activity'],
-    views: ['activityMain','culturalActivity','sportActivity','carPoolActivity','createSportActivity',
-        'createCulturalActivity','activityTab','createCarpoolActivity','detailSportActivity',
-        'detailCulturalActivity','detailCarpoolActivity'],
+    views: ['activityMain','activityTab','culturalActivity','sportActivity','carPoolActivity','home','myCulturalActivity','mySportActivity','myCarPoolActivity','createSportActivity','createCulturalActivity','createCarpoolActivity','login','detailSportActivity'],
+    
     controllers: ['controller'],
     stores: ['activityStore'],
 
@@ -30,6 +29,6 @@ Ext.application({
         '748x1024': 'resources/startup/748x1024.png',
         '1536x2008': 'resources/startup/1536x2008.png',
         '1496x2048': 'resources/startup/1496x2048.png'
-    },
+    }
 
 });
