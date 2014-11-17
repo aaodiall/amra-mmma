@@ -4,7 +4,8 @@ Ext.define('Lan.store.activityStore', {
     config: {
         model: 'Lan.model.activity',
         // specify the store id
-        storeId: 'activityStore',
+          fields: ['id_user', 'start_time'],
+          storeId: 'activityStore',
         autoLoad: true,
         autoSync: true,
         sorters: [{
@@ -21,5 +22,4 @@ Ext.define('Lan.store.activityStore', {
             type: "localstorage",
             id: "LanLocalStorage"            
         }
-    }
-});
+    }});

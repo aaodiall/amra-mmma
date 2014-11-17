@@ -17,18 +17,17 @@ Ext.define("Lan.view.activityTab", {
       
         {
             title: 'Sport',
-            iconCls: 'user', iconMask: true,
-            style: 'background-color: #e17467; color: white',
+            style: 'background-color: #f6eb69; color: black',
             xtype: 'sportactivity'
         }, {
             title: 'Cultural',
             iconCls: 'bookmarks', iconMask: true,
-            style: 'background-color: #f6eb69',
+            style: 'background-color: #f6ebcc',
             xtype: 'culturalactivity'
         }, {
             title: 'Car-pooling',
             iconCls: 'bookmarks', iconMask: true,
-            style: 'background-color: #f6ebaa',
+            style: 'background-color: #e17467; color: black',
             xtype: 'carpoolingactivity'
         }]
   }

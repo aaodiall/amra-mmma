@@ -16,7 +16,7 @@ Ext.define('Lan.model.activity', {
            {name:'actual_number', type:'integer'},
            {name:'max_number', type:'integer'},
            {name:'description', type:'string'},
-           {name:'id_user', type:'integer'},
+           {name:'id_user', type:'string'},
            {name:'id_status', type:'integer'},
            {name:'title', type:'string'},
            {name:'location', type:'string'},

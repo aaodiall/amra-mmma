@@ -31,11 +31,11 @@ Ext.define("Lan.view.createSportActivity", {
             xtype: 'datepickerfield',
             name: 'date_activity',
             label: 'Date',
-            value: new Date(),
+            value: new Date()
             //action: 'dateActivityPicker',
-            handler: function(){
-                datepicker.show()
-            }
+            //handler: function(){
+            //    datepicker.show();
+            //}
         },
         {
             xtype: 'textfield',
