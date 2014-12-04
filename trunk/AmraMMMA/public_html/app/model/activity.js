@@ -9,6 +9,7 @@ Ext.define('Lan.model.activity', {
         fields: [
            {name:'id', type:'auto', isUnique: true},
            {name:'date_activity', type:'Date'},
+           {name:'name', type:'String'},
            {name:'start_time', type:'string'},
            {name:'stop_time', type:'string'},
            {name:'meeting_location', type:'string'},

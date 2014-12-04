@@ -61,7 +61,7 @@ Ext.define('Lan.controller.controller', {
     // launching the first view of the application
     launch : function() { 
         
-        Ext.Viewport.add(Ext.create('Lan.view.activityMain'));
+        Ext.Viewport.add(Ext.create('Lan.view.login'));
         
         // retrieve and load the store
         this.getActivitystoreref().load();

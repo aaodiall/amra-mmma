@@ -9,22 +9,25 @@ and open the template in the editor.
 */
 
 .myPicture {
-        position: relative;
-         margin-left: 10px;
-         margin-right: 10px;
-            float: left;
-        }
+    position: relative;
+    margin-left: 10px;
+    margin-right: 10px;
+    float: left;
+}
 .myContent {
- margin-bottom: 5px;
+    margin-bottom: 5px;
 }
 .myPlaces {
     position: relative;
-         margin-left: 10px;
-         margin-right: 10%;
-            float: right;
-        }
-        .marge{
-           margin-right: 10%;
-           float: right;
-           
-        }
+    margin-left: 10px;
+    margin-right: 10%;
+    float: right;
+}
+.marge{
+    margin-right: 10%;
+    float: right;
+    
+}
+.facebook{
+    margin: 5%;
+}
