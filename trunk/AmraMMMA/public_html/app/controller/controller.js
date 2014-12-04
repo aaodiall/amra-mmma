@@ -1,3 +1,5 @@
+var socket = io.connect('http://localhost:3001');
+
 Ext.define('Lan.controller.controller', {
     extend: 'Ext.app.Controller',
 
@@ -57,15 +59,20 @@ Ext.define('Lan.controller.controller', {
     },
     
     init: function () {
+        if (!this.socket) {
+            this.launch();
+	}
+
     },
     // launching the first view of the application
     launch : function() { 
         
-        Ext.Viewport.add(Ext.create('Lan.view.login'));
+        Ext.Viewport.add(Ext.create('Lan.view.activityMain'));
         
         // retrieve and load the store
         this.getActivitystoreref().load();
-
+        var record = this.getActivitystoreref().findExact('description', 'Adams');
+        console.log("le record : "+ record);
         //create the view if it does not exist
         if (!this.getSportactivityref()){
             console.log("Dans le IF");
@@ -78,6 +85,21 @@ Ext.define('Lan.controller.controller', {
         // refresh the list with values
         this.getSportactivityref().refresh();
 
+
+        
+        socket.on('news', function (data) {
+            console.log('dans le console log du controller : '+data);
+            socket.emit('my other event', { 'data received by the app (and resent)' : data});
+            socket.emit('my other event', { 'data sent by the app' : 'la data !' });
+           
+        });
+},
+
+    doSend:function(){
+        var msg = this.getTxtMsg().getValue();
+        var msgStore = this.getViewMsg().getStore();
+        msgStore.add({name:msg,age:'180'});
+        this.getTxtMsg().setValue("");
     },
 
       
@@ -189,6 +211,7 @@ Ext.define('Lan.controller.controller', {
     */
     
     joinActivityTap: function() {  
+        socket.emit('my other event', { coucou: 'data', salut:'coi' });
             Ext.Msg.alert('Joined', 'Méthode à implémenter !');
     }
     

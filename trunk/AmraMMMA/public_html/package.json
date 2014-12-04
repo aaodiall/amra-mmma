@@ -4,9 +4,6 @@
   "description": "my first socket.io app",
   "dependencies": {
     "express": "^4.10.1",
-    "body-parser":"*",
-    "express-myconnection": "^1.0.4",
-    "mysql": "^2.5.2",
     "socket.io": "^1.2.0"
   }
 }

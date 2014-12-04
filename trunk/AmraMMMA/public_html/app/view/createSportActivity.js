@@ -12,6 +12,7 @@ Ext.define("Lan.view.createSportActivity", {
           title: 'Home',
           iconCls: 'user',
           scrollable: 'vertical',
+          ui:'plain',
           items: [
           /*{
             xtype: 'toolbar',
