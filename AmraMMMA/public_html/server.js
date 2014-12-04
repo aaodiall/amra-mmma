@@ -11,8 +11,14 @@ var user = require('./routes/user');
 var app = express();
 var connection = require('express-myconnection');
 var mysql = require('mysql');
+var server = app.listen(app.get('port'), function(){
+    console.log('Express server listening on port ' + app.get('port'));
+});
+
+
+var io = require('socket.io').listen(server);
 // all environments
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 3001);
 app.set('view engine', 'jade');
 
 app.use(bodyParser.urlencoded({
@@ -27,7 +33,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.get('/', function(req, res){
-  res.sendFile(__dirname + '/index1.html');
+  res.sendFile(__dirname + '/index.html');
+  console.log('nico');
 
 });
 app.post('/', user.save);
@@ -35,7 +42,10 @@ app.get('/:id', user.get);
 
 
 
-
-http.createServer(app).listen(app.get('port'), function(){
-    console.log('Express server listening on port ' + app.get('port'));
+io.sockets.on('connection', function (socket) {
+  socket.emit('news', { hello: 'world' });
+  socket.on('my other event', function (data) {
+    console.log(data);
+  });
 });
+

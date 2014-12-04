@@ -22,8 +22,8 @@ connection.connect(function(err){
 exports.all_activity = function(req, res){
     var id_status_delete=3;
      
-     connection.query('SELECT * FROM activite act,culture cul,covoiturage cov,sport sport
-      where act.id_status!='+id_status_delete,function(err,rows)     {
+     connection.query('SELECT * FROM activite act,culture cul,covoiturage cov,sport sport'+
+      'where act.id_status!='+id_status_delete,function(err,rows)     {
             
         if(err)
            console.log("Error Selecting : %s ",err );
@@ -38,10 +38,10 @@ exports.all_activity = function(req, res){
 
 /*get list activity by user id **/
 exports.all_activity_by_user = function(req, res){
-     var id_user:req.params.id_user;
+     var id_user=req.params.id_user;
      var id_status_delete=3;
-     connection.query('SELECT * FROM activite act,culture cul,covoiturage cov,sport sport
-      where act.id_user=? and act.id_status!='+id_status_delete,[id_user],function(err,rows)     {
+     connection.query('SELECT * FROM activite act,culture cul,covoiturage cov,sport sport'+
+      'where act.id_user=? and act.id_status!='+id_status_delete,[id_user],function(err,rows)     {
             
         if(err)
            console.log("Error Selecting : %s ",err );
@@ -57,8 +57,8 @@ exports.all_activity_by_user = function(req, res){
 /*join activity */
 exports.join_activity = function(req,res){
     var id ={
-        id_user:req.params.id_user;
-        id_activite:req.params.id_activity;
+        id_user:req.params.id_user,
+        id_activite:req.params.id_activity
     } ;
     var activity;
    
@@ -191,7 +191,7 @@ exports.create = function(req,res){
     else if(input.type_activity==3){
         var specific_data = {
             id:id_activity,
-            nom:titre:input.name,
+            nom:input.name,
             titre:input.title,
             lieu:input.location
         };
