@@ -94,7 +94,7 @@ Ext.define("Lan.view.detailSportActivity", {
                 height:60,
                 width:300,
                 margin: '50 10 0 100', //Haut, Bas, Droite, Gauche
-                align: 'center',
+                align: 'center'
             }
            
           ]
