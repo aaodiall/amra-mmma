@@ -29,14 +29,9 @@ Ext.define("Lan.view.createSportActivity", {
             label: 'Titre'
          },
          {
-            xtype: 'datepickerfield',
+            xtype: 'textfield',
             name: 'date_activity',
-            label: 'Date',
-            value: new Date()
-            //action: 'dateActivityPicker',
-            //handler: function(){
-            //    datepicker.show();
-            //}
+            label: 'Date'
         },
         {
             xtype: 'textfield',

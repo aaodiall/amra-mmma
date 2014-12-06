@@ -1,4 +1,4 @@
-var socket = io.connect('http://localhost:3001');
+//var socket = io.connect('http://localhost:3001');
 
 Ext.define('Lan.controller.controller', {
     extend: 'Ext.app.Controller',
@@ -59,10 +59,7 @@ Ext.define('Lan.controller.controller', {
     },
     
     init: function () {
-        if (!this.socket) {
-            this.launch();
-	}
-
+       
     },
     // launching the first view of the application
     launch : function() { 
@@ -85,14 +82,6 @@ Ext.define('Lan.controller.controller', {
         // refresh the list with values
         this.getSportactivityref().refresh();
 
-
-        
-        socket.on('news', function (data) {
-            console.log('dans le console log du controller : '+data);
-            socket.emit('my other event', { 'data received by the app (and resent)' : data});
-            socket.emit('my other event', { 'data sent by the app' : 'la data !' });
-           
-        });
 },
 
     doSend:function(){
@@ -107,12 +96,49 @@ Ext.define('Lan.controller.controller', {
         // retrieve values from the ref to the create activity
         var values = this.getCreatesportactivityref().getValues();
         // create a model instance with those values
-        var activity = Ext.create('Lan.model.activity',values);
-        
+        var activity = Ext.create('Lan.model.activity',values);       
+       
+        //envoi de la nouvelle activité  
+        data = activity.data;
+        data.type_activity=3;
+        //console.log("Affichage activity "+ data);
+        $.ajax({
+            url: '/createActivity',
+            type: 'POST',
+            data: data,
+            dataType:  "json",
+            /**
+             *  Define what will happen if the data are successfully sent
+             * @method success
+             * @param {} json le json reÃ§u par le serveur
+             * @return 
+             */
+            success: function(json) {
+                console.log(json);
+                if (json.result === 1){                    
+                    //Ext.Viewport.animateActiveItem({ xtype:'login'},{type:'slide'});
+                    Ext.Msg.alert('Succès', 'Votre activité a bien été créée.');
+                }
+                else
+                    Ext.Msg.alert('Erreur', 'Erreur création! Veuillez recommencer.');                       
+            },
+                
+            /**
+             * define what will happen in case of error
+             * @method error
+             * @return 
+             */
+            error: function(){
+                console.log(" Something goes wrong!!");                     
+            }         
+        });
+        //fin envoi nouvelle activité
+
         // add the model to the store if valid
         this.getActivitystoreref().add(values);
+        // reset the values
         this.getCreatesportactivityref().reset();
-        Ext.Msg.alert('Created', 'Sport activity created !!');
+        
     },
     
     createCulturalActivityButtonTap: function() {  
@@ -120,6 +146,42 @@ Ext.define('Lan.controller.controller', {
         var values = this.getCreateculturalactivityref().getValues();
         // create a model instance with those values
         var activity = Ext.create('Lan.model.activity',values);
+        
+        //envoi de la nouvelle activité  
+        data = activity.data;
+        data.type_activity=2;
+        //console.log("Affichage activity "+ data);
+        $.ajax({
+            url: '/createActivity',
+            type: 'POST',
+            data: data,
+            dataType:  "json",
+            /**
+             *  Define what will happen if the data are successfully sent
+             * @method success
+             * @param {} json le json reÃ§u par le serveur
+             * @return 
+             */
+            success: function(json) {
+                console.log(json);
+                if (json.result === 1){                    
+                    //Ext.Viewport.animateActiveItem({ xtype:'login'},{type:'slide'});
+                    Ext.Msg.alert('Succès', 'Votre activité a bien été créée.');
+                }
+                else
+                    Ext.Msg.alert('Erreur', 'Erreur création! Veuillez recommencer.');                       
+            },
+                
+            /**
+             * define what will happen in case of error
+             * @method error
+             * @return 
+             */
+            error: function(){
+                console.log(" Something goes wrong!!");                     
+            }         
+        });
+        //fin envoi nouvelle activité
         
         // add the model to the store if valid
         this.getActivitystoreref().add(values);
@@ -132,6 +194,42 @@ Ext.define('Lan.controller.controller', {
         var values = this.getCreatecarpoolactivityref().getValues();
         // create a model instance with those values
         var activity = Ext.create('Lan.model.activity',values);
+        
+        //envoi de la nouvelle activité  
+        data = activity.data;
+        data.type_activity=1;
+        //console.log("Affichage activity "+ data);
+        $.ajax({
+            url: '/createActivity',
+            type: 'POST',
+            data: data,
+            dataType:  "json",
+            /**
+             *  Define what will happen if the data are successfully sent
+             * @method success
+             * @param {} json le json reÃ§u par le serveur
+             * @return 
+             */
+            success: function(json) {
+                console.log(json);
+                if (json.result === 1){                    
+                    //Ext.Viewport.animateActiveItem({ xtype:'login'},{type:'slide'});
+                    Ext.Msg.alert('Succès', 'Votre activité a bien été créée.');
+                }
+                else
+                    Ext.Msg.alert('Erreur', 'Erreur création! Veuillez recommencer.');                       
+            },
+                
+            /**
+             * define what will happen in case of error
+             * @method error
+             * @return 
+             */
+            error: function(){
+                console.log(" Something goes wrong!!");                     
+            }         
+        });
+        //fin envoi nouvelle activité
         
         // add the model to the store if valid
         this.getActivitystoreref().add(values);
