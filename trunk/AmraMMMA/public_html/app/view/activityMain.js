@@ -81,21 +81,20 @@ Ext.define('Lan.view.activityMain', {
           leaf: true,
           slideButton: {
                 selector: 'titlebar'
-            },
+          },
             
           items: [
-      {
-        xtype:'titlebar',
-        docked:'top',
-        title:'Activités'
-        },
+          {
+            xtype:'titlebar',
+            docked:'top',
+            title:'Activités'
+          },
     
-        {
+          {
             title: 'activityTab',
             iconCls: 'user', iconMask: true,
-           
             xtype: 'activitytab'
-        }]
+          }]
          
         },
         {
@@ -188,10 +187,10 @@ Ext.define('Lan.view.activityMain', {
            this.callParent();
 
            //  record is visible
-           console.log("Dans le activityMain : ");
+           //console.log("Dans le activityMain : ");
            //if (!Ext.getComponent('sportItemId')){
            //     console.log("Dans le IF du activityMain");
-                Ext.create('Lan.view.sportActivity');
+           Ext.create('Lan.view.sportActivity');
            // }   
          }
 });

@@ -1,11 +1,11 @@
-Ext.define('Lan.store.activityStore', {
+Ext.define('Lan.store.mySportActivityStore', {
     extend: 'Ext.data.Store',
-    xtype: 'activitystore',
+    xtype: 'mysportactivitystore',
     config: {
         model: 'Lan.model.activity',
         // specify the store id
           fields: ['id_user', 'start_time'],
-          storeId: 'activityStore',
+          storeId: 'mySportActivityStore',
         autoLoad: true,
         autoSync: true,
         sorters:[{ property: 'date_activity', direction: 'ASC'}],
@@ -22,12 +22,15 @@ Ext.define('Lan.store.activityStore', {
     } ,   
         
         data: [
+            //{ date_activity: "11/09/2014", description: "Washington" ,photo_activity:"resources/icons/Icon.png"},
+            //{ date_activity: "11/09/2014", description: "Adams" ,photo_activity:"Icon.png"},
+            //{ date_activity: "11/10/2014", description: "Jefferson",photo_activity:"Icon.png" }
             
         ],
         proxy: {
             // store will be locally persisted
-            // type: "localstorage",
-            // id: "LanLocalStorage"            
+            type: "localstorage",
+            id: "LanLocalStorage"            
         }
     }
 });

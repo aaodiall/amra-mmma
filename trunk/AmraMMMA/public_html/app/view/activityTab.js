@@ -25,10 +25,10 @@ Ext.define("Lan.view.activityTab", {
             style: 'background-color: #f6ebcc',
             xtype: 'culturalactivity'
         }, {
-            title: 'Car-pooling',
+            title: 'Carpool',
             iconCls: 'bookmarks', iconMask: true,
             style: 'background-color: #e17467; color: black',
-            xtype: 'carpoolingactivity'
+            xtype: 'carpoolactivity'
         }]
   }
 });

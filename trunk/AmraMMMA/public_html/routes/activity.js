@@ -3,9 +3,8 @@
 var mysql = require('mysql');
  var connection = mysql.createConnection({
     host     : 'localhost',
-    user : 'root',
-    password: 'rootpwd',
-    database: 'amra_mmma'
+    user     : 'root',
+    database: 'amra_mmma',
 });
  
 // Log any errors connected to the connection
@@ -21,15 +20,22 @@ connection.connect(function(err){
 /*get list activity **/
 exports.all_activity = function(req, res){
     var id_status_delete=3;
+    var type=req.params.type;
+    var table = null;
      
-     connection.query('SELECT * FROM activite act,culture cul,covoiturage cov,sport sport'+
-      'where act.id_status!='+id_status_delete,function(err,rows)     {
-            
+    if(type==='125'){
+        table='covoiturage';
+    } else if (type==='489'){
+        table='culture';
+    } else if (type==='759app'){
+        table='sport';
+    }
+
+    connection.query('SELECT * FROM '+table+' x WHERE\n\
+          x.id_status!=?',[id_status_delete],function(err,rows){
         if(err)
-           console.log("Error Selecting : %s ",err );
-     
-            res.send(rows);
-                           
+            console.log("Error Selecting : %s ",err );
+            res.send(rows);               
          });
        
 };
@@ -38,16 +44,28 @@ exports.all_activity = function(req, res){
 
 /*get list activity by user id **/
 exports.all_activity_by_user = function(req, res){
+     var type=req.params.type;
      var id_user=req.params.id_user;
-     var id_status_delete=3;
+     var table = null;
+     /*var id_status_delete=3;
      connection.query('SELECT * FROM activite act,culture cul,covoiturage cov,sport sport'+
-      'where act.id_user=? and act.id_status!='+id_status_delete,[id_user],function(err,rows)     {
-            
-        if(err)
+      'where act.id_user=? and act.id_status!='+id_status_delete,[id_user],function(err,rows){
+     */
+    if(type==='125'){
+        table='covoiturage';
+    } else if (type==='489'){
+        table='culture';
+    } else if (type==='759app'){
+        table='sport';
+    }
+
+    connection.query('SELECT * FROM '+table+' x WHERE\n\
+        x.id_user=?',[id_user],function(err,rows){
+  
+    if(err){
            console.log("Error Selecting : %s ",err );
-     
-            res.send(rows);
-                           
+        }
+            res.send(rows);          
          });
        
 };

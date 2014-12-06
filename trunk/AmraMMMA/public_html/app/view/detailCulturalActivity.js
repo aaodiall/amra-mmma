@@ -1,33 +1,109 @@
 Ext.define("Lan.view.detailCulturalActivity", {
     extend: 'Ext.form.Panel',
     xtype: 'detailculturalactivity',
-    width: 500,
-    height: 400,
-    title: 'Border Layout',
-    layout: 'border',
-    items: [{
-        title: 'South Region is resizable',
-        region: 'south',     // position for region
-        xtype: 'panel',
-        height: 100,
-        split: true,         // enable resizing
-        margins: '0 5 5 5'
-    },{
-        // xtype: 'panel' implied by default
-        title: 'West Region is collapsible',
-        region:'west',
-        xtype: 'panel',
-        margins: '5 0 0 5',
-        width: 200,
-        collapsible: true,   // make collapsible
-        id: 'west-region-container',
-        layout: 'fit'
-    },{
-        title: 'Center Region',
-        region: 'center',     // center region is required, no width/height specified
-        xtype: 'panel',
-        layout: 'fit',
-        margins: '5 5 0 0'
-    }],
-    renderTo: Ext.getBody()
-    });
+    config: {
+        title: 'Titre de l\'activité',
+        id: 'idCulturalDetail',
+          layout: {
+            type: 'vbox',
+            align : 'stretch',
+            pack  : 'start',
+            animation: {
+                type: 'slide',
+                direction: 'right'
+            }
+            },
+
+        items: [
+         {
+            maxDrag: 400,
+            xtype: 'toolbar',
+            docked: 'top',
+            title: 'Détail de l\'activité',
+            items:[{
+                xtype: 'button',
+                ui: 'round', 
+                action: 'backToMyActivity',
+                text: 'Revenir aux activités'
+            }]
+          },
+            
+            {
+                html:'<b> Nom de l\'organisateur : </b>'
+            },
+            {
+                xtype:'label',
+                itemId:'iduser'
+            },
+            
+            
+            
+            {
+                html:'<br><b> Heure de debut de l\'activité : </b>'
+            },
+            {
+                xtype:'label',
+                itemId:'starttime'
+            },
+            
+            
+            
+            {
+                html:'<br><b> Heure de fin de l\'activité : </b>'
+            },
+            {
+                xtype:'label',
+                itemId:'stoptime'
+            },
+            
+            
+            
+            {
+                html:'<br><b> Lieu de l\'activité : </b>'
+            },
+            {
+                xtype:'label',
+                itemId:'location'
+            },
+            
+            
+            
+            {
+                html:'<br><b> Nombre max de personnes : </b>'
+            },
+            {
+                xtype:'label',
+                itemId:'maxnumber'
+            },
+            
+            
+            
+            {
+                html:'<br><b> Description de l\'activité : </b>'
+            },
+            {
+                xtype:'label',
+                itemId:'description'
+            },
+            
+             {
+                xtype: 'button',
+                text: 'Rejoindre l\'activité',
+                action: 'joinActivity',
+                ui: 'action',
+                height:60,
+                width:300,
+                margin: '50 10 0 100', //Haut, Bas, Droite, Gauche
+                align: 'center'
+            }
+           
+          ]
+        },
+        
+         initialize: function(){
+           this.callParent();
+
+           //  record is visible
+           console.log("ICI : "+this.config.record);
+         }
+});

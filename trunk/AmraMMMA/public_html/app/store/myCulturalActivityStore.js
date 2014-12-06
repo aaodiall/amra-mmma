@@ -1,11 +1,11 @@
-Ext.define('Lan.store.activityStore', {
+Ext.define('Lan.store.myCulturalActivityStore', {
     extend: 'Ext.data.Store',
-    xtype: 'activitystore',
+    xtype: 'myculturalactivitystore',
     config: {
         model: 'Lan.model.activity',
         // specify the store id
           fields: ['id_user', 'start_time'],
-          storeId: 'activityStore',
+          storeId: 'myCulturalActivityStore',
         autoLoad: true,
         autoSync: true,
         sorters:[{ property: 'date_activity', direction: 'ASC'}],
@@ -22,12 +22,11 @@ Ext.define('Lan.store.activityStore', {
     } ,   
         
         data: [
-            
         ],
         proxy: {
             // store will be locally persisted
-            // type: "localstorage",
-            // id: "LanLocalStorage"            
+            type: "localstorage",
+            id: "LanLocalStorage"            
         }
     }
 });

@@ -8,10 +8,14 @@ Ext.application({
     
     // MVC components are specified
     models: ['activity'],
-    views: ['activityMain','activityTab','culturalActivity','sportActivity','carPoolActivity','home','myCulturalActivity','mySportActivity','myCarPoolActivity','createSportActivity','createCulturalActivity','createCarpoolActivity','login','detailSportActivity'],
+    views: ['activityMain','activityTab','culturalActivity','sportActivity','carpoolActivity',
+        'home','myCulturalActivity','mySportActivity','myCarpoolActivity','createSportActivity',
+        'createCulturalActivity','createCarpoolActivity','login','detailSportActivity',
+        'detailMyCarpoolActivity','detailMyCulturalActivity','detailMySportActivity'],
     
     controllers: ['controller'],
-    stores: ['activityStore'],
+    stores: ['activityStore','myCarpoolActivityStore','myCulturalActivityStore','mySportActivityStore',
+            'sportActivityStore','culturalActivityStore','carpoolActivityStore'],
 
      icon: {
         '57': 'resources/icons/Icon.png',

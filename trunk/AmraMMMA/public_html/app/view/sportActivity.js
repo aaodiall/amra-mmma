@@ -1,20 +1,18 @@
 Ext.define("Lan.view.sportActivity", {
-    extend: 'Ext.dataview.List',
+    extend: 'Ext.List',
     xtype: 'sportactivity',
-    itemId :'sportItemId',
+    requires: ['Lan.store.sportActivityStore'],
     config: {
-          title: 'Sport',
-          iconCls: 'bookmarks',
-          itemTpl: '<div class="user">\n\
-                        Organisateur : <strong>{id_user}</strong>\n\
-                        <br>Lieu : <strong>{location}</strong>\n\
-                    </div>'
-        },
-        
-        initialize: function(){
-           this.callParent();
-
-           //  record is visible
-           console.log("Dans le sport activity" + this);
-         }
-});       
+          grouped: true,
+         
+          itemTpl: '<div class="myPicture">' +
+        '<img src="http://upload.wikimedia.org/wikipedia/commons/9/98/RomanA-01.svg" alt="picture" />' +
+        '</div>' +
+        '<div class="myContent">'+
+        '<div><b>Activité : </b>{title}<br>'+
+        '<b> Lieu :</b> {location}<span class="marge"><b>{max_number} personnes maximum</b></span></div>',
+      
+        onItemDisclosure:true,
+          store: 'sportActivityStore'
+        }
+});
