@@ -6,15 +6,6 @@ Ext.define("Lan.view.createCarpoolActivity", {
           iconCls: 'user',
           scrollable: 'vertical',
           items: [
-          /*{
-            xtype: 'toolbar',
-            title: 'Créer une activité'
-          },*/
-          {
-            xtype: 'textfield',
-            name: 'id_user',
-            label: 'Nom de l\'organisateur'
-         },
          {
             xtype: 'textfield',
             name: 'date_activity',
