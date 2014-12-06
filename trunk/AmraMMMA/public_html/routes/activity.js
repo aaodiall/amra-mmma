@@ -3,9 +3,9 @@
 var mysql = require('mysql');
  var connection = mysql.createConnection({
     host     : 'localhost',
-  activite     : 'root',
-  password : 'alphanicolala',
-  database: 'amra_mmma',
+    user : 'root',
+    password: 'rootpwd',
+    database: 'amra_mmma'
 });
  
 // Log any errors connected to the connection
@@ -125,14 +125,18 @@ exports.quit_activity = function(req,res){
         }); 
 };
 
-
-
-/*Save the activite*/
+/*Create an activity*/
 exports.create = function(req,res){
-   console.log(req.body);
+    console.log("SERVER BIEN RECU "+JSON.stringify(req.body));
     var input = JSON.parse(JSON.stringify(req.body));
     var id_activity;
-    var data = {
+    var result={result:0};
+       
+    //numero de l'activité par ordre alphabetique 
+    //covoiturage
+    if(input.type_activity==="1"){
+        console.log("JE SUIS COVOITURAAAAAAGE");
+        var specific_data = {
             date_activite:input.date_activity,
             heure_debut:input.start_time,
             heure_fin:input.stop_time,
@@ -142,23 +146,7 @@ exports.create = function(req,res){
             nombre_max:input.max_number,
             description:input.description,
             id_user:input.id_user,
-            id_status:input.id_status
-           
-        };
-        var query = connection.query("INSERT INTO activite set ? ",data, function(err, rows)
-        {
-            if (err)
-                console.log("Error inserting : %s ",err );
-            id_activity=rows.insertId;
-            res.send(data);
-        });
-       
-    
-    //numero de l'activité par ordre alphabetique 
-//covoiturage
-   if(input.type_activity==1){
-        var specific_data = {
-            id:id_activity,
+            id_status:1,
             lieu_depart:input.departure_location,
             lieu_arrivee:input.arrival_location,
             prix:input.cost
@@ -166,47 +154,89 @@ exports.create = function(req,res){
         };
         var query = connection.query("INSERT INTO covoiturage set ? ",specific_data, function(err, rows)
         {
-            if (err)
-                console.log("Error inserting : %s ",err );
-            
-            res.send(specific_data);
+            if (err){
+                console.log("Error inserting covoiturage : %s ",err );           
+            }
+            else{
+                id_activity=rows.insertId;
+                console.log("ID ACT " + id_activity);
+                // envoi du résultat au client
+                result.result=1;
+                console.log("Le résultat est : "+JSON.stringify(result));
+                res.send(JSON.stringify(result));
+            }
         });
 
     }//culture
-    else if(input.type_activity==2){
+    else if(input.type_activity === "2"){
+        console.log("JE SUIS CULTUUUUUUUURE");
         var specific_data = {
-            id:id_activity,
+            date_activite:input.date_activity,
+            heure_debut:input.start_time,
+            heure_fin:input.stop_time,
+            lieu_rdv: input.meeting_location,
+            photo_activite:input.photo_activity,
+            nombre_actuel:input.actual_number,
+            nombre_max:input.max_number,
+            description:input.description,
+            id_user:input.id_user,
+            id_status:1,
             titre:input.title,
             lieu:input.location
         };
         var query = connection.query("INSERT INTO culture set ? ",specific_data, function(err, rows)
         {
-            if (err)
-                console.log("Error inserting : %s ",err );
+            if (err){
+            console.log("Error inserting culture : %s ",err );
             
-            res.send(specific_data);
+            }
+            else{
+                id_activity=rows.insertId;
+                console.log("ID ACT " + id_activity);
+                // envoi du résultat au client
+                result.result=1;
+                console.log("Le résultat est : "+JSON.stringify(result));
+                res.send(JSON.stringify(result));
+            }
         });
 
     }//sport
-    else if(input.type_activity==3){
+    else if(input.type_activity === "3"){
+        console.log("JE SUIS SPOOOOOOOOOORT");
+        
         var specific_data = {
-            id:id_activity,
+            date_activite:input.date_activity,
+            heure_debut:input.start_time,
+            heure_fin:input.stop_time,
+            lieu_rdv: input.meeting_location,
+            photo_activite:input.photo_activity,
+            nombre_actuel:input.actual_number,
+            nombre_max:input.max_number,
+            description:input.description,
+            id_user:input.id_user,
+            id_status:1,
             nom:input.name,
             titre:input.title,
             lieu:input.location
         };
-        var query = connection.query("INSERT INTO sport set ? ",specific_data, function(err, rows)
+        
+        var query = connection.query("INSERT INTO sport set ? ",[specific_data], function(err, rows)
         {
-            if (err)
-                console.log("Error inserting : %s ",err );
-            
-            res.send(specific_data);
-        });
-
-    }
+            if (err){
+            console.log("Error inserting sport : %s ",err );
+           
+            }
+            else{
+                id_activity=rows.insertId;
+                console.log("ID ACT " + id_activity);
+                // envoi du résultat au client
+                result.result=1;
+                console.log("Le résultat est : "+JSON.stringify(result));
+                res.send(JSON.stringify(result));
+            }
+        });       
         
-        
-       
+    }      
 };
 
 exports.delete_activite = function(req,res){
