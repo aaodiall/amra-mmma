@@ -40,6 +40,7 @@ app.get('/:type/:id_user',activity.all_activity_by_user);
 app.get('/:type',activity.all_activity);
 
 app.post('/createActivity',activity.create);
+app.post('/login',user.authentification);
 
 
 http.createServer(app).listen(app.get('port'), function(){

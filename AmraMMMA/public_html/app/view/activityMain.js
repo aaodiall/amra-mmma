@@ -67,6 +67,7 @@ Ext.define('Lan.view.activityMain', {
                 selector: 'toolbar'
           },
           
+          
           items: [{
                 xtype: 'toolbar',
                 title: 'Mes Activités',

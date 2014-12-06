@@ -1,8 +1,8 @@
-Ext.define('Lan.store.UserStore', {
+Ext.define('Lan.store.userStore', {
     extend: 'Ext.data.Store',
     xtype: 'userstore',
     config: {
-        model: 'Lan.model.User',
+        model: 'Lan.model.user',
         // specify the store id
         storeId: 'userStore',
         autoLoad: true,
@@ -13,7 +13,7 @@ Ext.define('Lan.store.UserStore', {
         }],
         grouper: {
           groupFn: function(record) {
-           return record.get('name')[0];
+           //return record.get('name')[0];
           }
         },
         proxy: {

@@ -3,8 +3,9 @@
 var mysql = require('mysql');
  var connection = mysql.createConnection({
     host     : 'localhost',
-    user     : 'root',
-    database: 'amra_mmma',
+  user     : 'root',
+  password : 'alphanicolala',
+  database: 'amra_mmma'
 });
  
 // Log any errors connected to the connection

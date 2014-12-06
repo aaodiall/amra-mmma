@@ -32,6 +32,7 @@ Ext.define('Lan.controller.controller', {
             mysportactivityref : 'mysportactivity',
             myculturalactivityref : 'myculturalactivity',
             mycarpoolactivityref : 'mycarpoolactivity',
+            loginref:'login',
             
                 
             
@@ -64,34 +65,41 @@ Ext.define('Lan.controller.controller', {
                 selector: 'mysportactivitystore',
                 xtype: 'mysportactivitystore',
                 autoCreate: true
+            },
+            userstoreref: {
+                selector: 'userstore',
+                xtype: 'userstore',
+                autoCreate: true
             }
         },
         control: {
             'button[action=createSportActivity]': {
-               tap: 'createSportActivityButtonTap'
+                tap: 'createSportActivityButtonTap'
             },
             'button[action=createCulturalActivity]': {
-               tap: 'createCulturalActivityButtonTap'
+                tap: 'createCulturalActivityButtonTap'
             },
             'button[action=createCarpoolActivity]': {
-               tap: 'createCarpoolActivityButtonTap'
+                tap: 'createCarpoolActivityButtonTap'
             },
             'button[action=backToMyActivity]': {
-               tap: 'backToMyActivityTap'
+                tap: 'backToMyActivityTap'
             },
             'button[action=joinActivity]': {
-               tap: 'joinActivityTap'
+                tap: 'joinActivityTap'
+            },
+            'button[action=logInButton]': {
+                tap: 'loginTap'
             },
             
-            
             sportactivity: {
-               itemtap: 'sportactivitytap'
+                itemtap: 'sportactivitytap'
             },
             mycarpoolactivity: {
                itemtap: 'mycarpoolactivitytap'
             },
             myculturalactivity: {
-               itemtap: 'myculturalactivitytap'
+                itemtap: 'myculturalactivitytap'
             },
             mysportactivity: {
                itemtap: 'mysportactivitytap'
@@ -105,9 +113,10 @@ Ext.define('Lan.controller.controller', {
     // launching the first view of the application
     launch : function() { 
         
-        Ext.Viewport.add(Ext.create('Lan.view.activityMain'));
-        thisRef=this;
+        Ext.Viewport.add(Ext.create('Lan.view.login'));
+     
         
+      
         //stores need to be initialize here !
        
         myCarpoolStore=Ext.StoreManager.get('myCarpoolActivityStore');
@@ -210,6 +219,69 @@ Ext.define('Lan.controller.controller', {
 
     },
 
+    loginTap: function() {  
+        var thisref=this;     
+         var values = this.getLoginref().getValues();
+         console.log("controler "+JSON.stringify(values));
+        
+        var user = Ext.create('Lan.model.user',values);
+        var resValidation=user.validate();
+        console.log(user);
+         console.log(resValidation);
+        if (resValidation.isValid()) {
+                 var values = this.getLoginref().getValues();
+        console.log("controler "+JSON.stringify(values));
+        $.ajax({
+            url: '/login',
+            type: 'POST',
+            data: values,
+            dataType:  "json",
+            /**
+             *  Define what will happen if the data are successfully sent
+             * @method success
+             * @param {} json le json reçu par le serveur
+             * @return 
+             */
+            success: function(json) {
+                console.log('login json: '+ JSON.stringify(json));
+               if(json.result==="0"){
+                    Ext.Msg.alert('Erreur', '<br>Email ou mot de passe incorrect</br>');
+               }else{
+                var user = Ext.create('Lan.model.user',values);
+                user.id=json.id_user;
+               
+                // add the model to the store if valid
+                thisref.getUserstoreref().add(user);
+               Ext.Viewport.animateActiveItem({ xtype:'maincontainer'},{type:'slide'});
+               }
+               
+                
+            },
+                
+            /**
+             * define what will happen in case of error
+             * @method error
+             * @return 
+             */
+            error: function(){
+                console.log(" Something goes wrong!!");
+                     
+            }
+                
+        });
+        } else {
+                  // show validation errors
+                  var message='<br/>';
+                  resValidation.each(
+                      function (item, index, length) {
+                          message = message + item.getField()+' - '+ item.getMessage() +'<br/>';   
+                       });
+                  Ext.Msg.alert('Erreur', message);
+         }     
+  
+        
+        
+    }, 
 
     //Create a json with Model Format (from a json received)
     createJson: function(){
@@ -492,7 +564,7 @@ Ext.define('Lan.controller.controller', {
         this.getDetailsportactivityref().getComponent('maxnumber').setHtml(record.getData().max_number);
         this.getDetailsportactivityref().getComponent('description').setHtml(record.getData().description);
 
-},
+    },
         
     mycarpoolactivitytap: function (dataview, index, target, record, e, eOpts) {
         Ext.Viewport.animateActiveItem({ xtype:'detailmycarpoolactivity'},{type:'slide'});
@@ -535,11 +607,11 @@ Ext.define('Lan.controller.controller', {
         this.getDetailmysportactivityref().getComponent('maxnumber').setHtml(record.getData().max_number);
         this.getDetailmysportactivityref().getComponent('description').setHtml(record.getData().description);
 
-},
+    },
 
        
-       // Function called when the back button is pressed
-       backToMyActivityTap: function() {  
+    // Function called when the back button is pressed
+    backToMyActivityTap: function() {  
         //To remove a view !
         Ext.Viewport.remove(Ext.Viewport.getActiveItem(),true);
     },
