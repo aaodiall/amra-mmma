@@ -8,7 +8,6 @@ var mySportStore;
 
 var jsonReceived;
 var jsonModel;
-
 Ext.define('Lan.controller.controller', {
     extend: 'Ext.app.Controller',
 
@@ -112,13 +111,12 @@ Ext.define('Lan.controller.controller', {
     },
     // launching the first view of the application
     launch : function() { 
-        
+  
         Ext.Viewport.add(Ext.create('Lan.view.login'));
-     
+},
         
-      
+    connectionOk: function(){
         //stores need to be initialize here !
-       
         myCarpoolStore=Ext.StoreManager.get('myCarpoolActivityStore');
         myCulturalStore=Ext.StoreManager.get('myCulturalActivityStore');
         mySportStore=Ext.StoreManager.get('mySportActivityStore');
@@ -129,33 +127,24 @@ Ext.define('Lan.controller.controller', {
 
         this.getMyActivity();
         this.getAllActivities();
-    
-        //create the view if it does not exist
-        //if (!this.getSportactivityref()){
-        //    Ext.create('Lan.view.sportActivity');
-        //}
-        
-        // initialize the list from the store
-        //this.getSportactivityref().setStore(this.getMysportactivitystoreref());
-        
-        // refresh the list with values
-        //this.getSportactivityref().refresh();
-},
-        
-        
+    },
+            
+            
     //getting the USER activity    
     getMyActivity: function(){
         
         var thisRef=this;
         this.syncAndLoad();
- 
+        var localId = localStorage.getItem('localid');
+        
+        console.log("a"+localId);
         //Covoiturage = 125
         //Culture = 489
         //Sport = 759app
                 
         //CARPOOL ACTIVITY
         $.ajax({
-            url: '/125/'+7,
+            url: '/125/'+localId,
             type: 'GET',
             dataType:  "json",
 
@@ -176,7 +165,7 @@ Ext.define('Lan.controller.controller', {
         
         //CULTURAL ACTIVITY
         $.ajax({
-            url: '/489/'+7,
+            url: '/489/'+localId,
             type: 'GET',
             dataType:  "json",
 
@@ -197,7 +186,7 @@ Ext.define('Lan.controller.controller', {
         
         //SPORT ACTIVITY
         $.ajax({
-            url: '/759app/'+7,
+            url: '/759app/'+localId,
             type: 'GET',
             dataType:  "json",
 
@@ -249,10 +238,11 @@ Ext.define('Lan.controller.controller', {
                }else{
                 var user = Ext.create('Lan.model.user',values);
                 user.id=json.id_user;
-               
                 // add the model to the store if valid
-                thisref.getUserstoreref().add(user);
-               Ext.Viewport.animateActiveItem({ xtype:'maincontainer'},{type:'slide'});
+                localStorage.setItem('localid',user.id);
+                //thisref.getUserstoreref().add(user);
+                Ext.Viewport.animateActiveItem({ xtype:'maincontainer'},{type:'slide'});
+                thisref.connectionOk();
                }
                
                 
@@ -409,9 +399,10 @@ Ext.define('Lan.controller.controller', {
         var activity = Ext.create('Lan.model.activity',values);       
        
         //envoi de la nouvelle activité  
-        data = activity.data;
+        var data = activity.data;
         data.type_activity=3;
-        //console.log("Affichage activity "+ data);
+        data.id_user=localStorage.getItem('localid');;
+
         $.ajax({
             url: '/createActivity',
             type: 'POST',
@@ -445,10 +436,11 @@ Ext.define('Lan.controller.controller', {
         //fin envoi nouvelle activité
 
         // add the model to the store if valid
-        this.getActivitystoreref().add(values);
+        sportStore.add(values);
+        mySportStore.add(values);
         // reset the values
         this.getCreatesportactivityref().reset();
-        this.syncAndLoad();
+        //this.syncAndLoad();
     },
     
     createCulturalActivityButtonTap: function() {  
@@ -458,9 +450,10 @@ Ext.define('Lan.controller.controller', {
         var activity = Ext.create('Lan.model.activity',values);
         
         //envoi de la nouvelle activité  
-        data = activity.data;
+        var data = activity.data;
         data.type_activity=2;
-        //console.log("Affichage activity "+ data);
+        data.id_user=localStorage.getItem('localid');
+        
         $.ajax({
             url: '/createActivity',
             type: 'POST',
@@ -494,10 +487,10 @@ Ext.define('Lan.controller.controller', {
         //fin envoi nouvelle activité
         
         // add the model to the store if valid
-        this.getActivitystoreref().add(values);
+        //this.getActivitystoreref().add(values);
         this.getCreateculturalactivityref().reset();
         Ext.Msg.alert('Created', 'Cultural activity created !!');
-        this.syncAndLoad();
+        //this.syncAndLoad();
     },
             
     createCarpoolActivityButtonTap: function() {  
@@ -507,9 +500,9 @@ Ext.define('Lan.controller.controller', {
         var activity = Ext.create('Lan.model.activity',values);
         
         //envoi de la nouvelle activité  
-        data = activity.data;
+        var data = activity.data;
         data.type_activity=1;
-        //console.log("Affichage activity "+ data);
+        data.id_user=localStorage.getItem('localid');
         $.ajax({
             url: '/createActivity',
             type: 'POST',
@@ -546,7 +539,7 @@ Ext.define('Lan.controller.controller', {
         myCarpoolStore.add(values);
         this.getCreatecarpoolactivityref().reset();
         Ext.Msg.alert('Created', 'Carpool Activity created !!');
-        this.syncAndLoad();
+        //this.syncAndLoad();
     },
       
     sportactivitytap: function (dataview, index, target, record, e, eOpts) {
@@ -606,7 +599,7 @@ Ext.define('Lan.controller.controller', {
         this.getDetailmysportactivityref().getComponent('location').setHtml(record.getData().location);
         this.getDetailmysportactivityref().getComponent('maxnumber').setHtml(record.getData().max_number);
         this.getDetailmysportactivityref().getComponent('description').setHtml(record.getData().description);
-
+        
     },
 
        

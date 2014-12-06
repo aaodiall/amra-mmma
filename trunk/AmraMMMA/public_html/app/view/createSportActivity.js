@@ -14,15 +14,6 @@ Ext.define("Lan.view.createSportActivity", {
           scrollable: 'vertical',
           ui:'plain',
           items: [
-          /*{
-            xtype: 'toolbar',
-            title: 'Créer une activité'
-          },*/
-          {
-            xtype: 'textfield',
-            name: 'id_user',
-            label: 'Nom de l\'organisateur'
-         },
          {
             xtype: 'textfield',
             name: 'title',
