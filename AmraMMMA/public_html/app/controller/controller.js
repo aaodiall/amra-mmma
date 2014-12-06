@@ -1,4 +1,13 @@
-//var socket = io.connect('http://localhost:3001');
+var carpoolStore;
+var culturalStore;
+var sportStore;
+
+var myCarpoolStore;
+var myCulturalStore;
+var mySportStore;
+
+var jsonReceived;
+var jsonModel;
 
 Ext.define('Lan.controller.controller', {
     extend: 'Ext.app.Controller',
@@ -8,20 +17,52 @@ Ext.define('Lan.controller.controller', {
             createsportactivityref: 'createsportactivity',
             createculturalactivityref: 'createculturalactivity',
             createcarpoolactivityref: 'createcarpoolactivity',    
+            
             sportactivityref: 'sportactivity',
             culturalactivityref: 'culturalactivity',
             carpoolactivityref: 'carpoolactivity',
+            
             detailsportactivityref: 'detailsportactivity',
+            detailmycarpoolactivityref: 'detailmycarpoolactivity',
+            detailmyculturalactivityref: 'detailmyculturalactivity',
+            detailmysportactivityref: 'detailmysportactivity',
+            
             externallistref : 'externallist',
+            
             mysportactivityref : 'mysportactivity',
             myculturalactivityref : 'myculturalactivity',
             mycarpoolactivityref : 'mycarpoolactivity',
             
                 
             
-            activitystoreref: {
-                selector: 'activitystore',
-                xtype: 'activitystore',
+           carpoolactivitystoreref: {
+                selector: 'carpoolactivitystore',
+                xtype: 'carpoolactivitystore',
+                autoCreate: true
+            },
+            culturalactivitystoreref: {
+                selector: 'culturalactivitystore',
+                xtype: 'culturalactivitystore',
+                autoCreate: true
+            },
+            sportactivitystoreref: {
+                selector: 'sportactivitystore',
+                xtype: 'sportactivitystore',
+                autoCreate: true
+            },
+            mycarpoolactivitystoreref: {
+                selector: 'mycarpoolactivitystore',
+                xtype: 'mycarpoolactivitystore',
+                autoCreate: true
+            },
+            myculturalactivitystoreref: {
+                selector: 'myculturalactivitystore',
+                xtype: 'myculturalactivitystore',
+                autoCreate: true
+            },
+            mysportactivitystoreref: {
+                selector: 'mysportactivitystore',
+                xtype: 'mysportactivitystore',
                 autoCreate: true
             }
         },
@@ -46,52 +87,249 @@ Ext.define('Lan.controller.controller', {
             sportactivity: {
                itemtap: 'sportactivitytap'
             },
-            mysportactivity: {
-               itemtap: 'mysportactivitytap'
+            mycarpoolactivity: {
+               itemtap: 'mycarpoolactivitytap'
             },
             myculturalactivity: {
                itemtap: 'myculturalactivitytap'
             },
-            mycarpoolactivity: {
-               itemtap: 'mycarpoolactivitytap'
-            }
+            mysportactivity: {
+               itemtap: 'mysportactivitytap'
+            },
+
         }
     },
     
     init: function () {
-       
     },
     // launching the first view of the application
     launch : function() { 
         
         Ext.Viewport.add(Ext.create('Lan.view.activityMain'));
+        thisRef=this;
         
-        // retrieve and load the store
-        this.getActivitystoreref().load();
-        var record = this.getActivitystoreref().findExact('description', 'Adams');
-        console.log("le record : "+ record);
+        //stores need to be initialize here !
+       
+        myCarpoolStore=Ext.StoreManager.get('myCarpoolActivityStore');
+        myCulturalStore=Ext.StoreManager.get('myCulturalActivityStore');
+        mySportStore=Ext.StoreManager.get('mySportActivityStore');
+
+        carpoolStore = Ext.StoreManager.get('carpoolActivityStore');
+        culturalStore = Ext.StoreManager.get('culturalActivityStore');
+        sportStore = Ext.StoreManager.get('sportActivityStore');
+
+        this.getMyActivity();
+        this.getAllActivities();
+    
         //create the view if it does not exist
-        if (!this.getSportactivityref()){
-            console.log("Dans le IF");
-            Ext.create('Lan.view.sportActivity');
-        }
+        //if (!this.getSportactivityref()){
+        //    Ext.create('Lan.view.sportActivity');
+        //}
         
         // initialize the list from the store
-        this.getSportactivityref().setStore(this.getActivitystoreref());
+        //this.getSportactivityref().setStore(this.getMysportactivitystoreref());
         
         // refresh the list with values
-        this.getSportactivityref().refresh();
-
+        //this.getSportactivityref().refresh();
 },
+        
+        
+    //getting the USER activity    
+    getMyActivity: function(){
+        
+        var thisRef=this;
+        this.syncAndLoad();
+ 
+        //Covoiturage = 125
+        //Culture = 489
+        //Sport = 759app
+                
+        //CARPOOL ACTIVITY
+        $.ajax({
+            url: '/125/'+7,
+            type: 'GET',
+            dataType:  "json",
 
-    doSend:function(){
-        var msg = this.getTxtMsg().getValue();
-        var msgStore = this.getViewMsg().getStore();
-        msgStore.add({name:msg,age:'180'});
-        this.getTxtMsg().setValue("");
+            success: function(json) {
+                //Getting MY activity
+                for (var i = 0 ; i<json.length ; i++){
+                    jsonReceived=json[i];
+                    thisRef.createJson();
+                    myCarpoolStore.add(jsonModel);
+                }
+            },
+            
+            error: function(){
+                console.log(" Something goes wrong!!");
+            }    
+        });
+       
+        
+        //CULTURAL ACTIVITY
+        $.ajax({
+            url: '/489/'+7,
+            type: 'GET',
+            dataType:  "json",
+
+            success: function(json) {
+                //Getting MY activity
+                for (var i = 0 ; i<json.length ; i++){
+                    jsonReceived=json[i];
+                    thisRef.createJson();
+                    myCulturalStore.add(jsonModel);
+                }
+            },
+            
+            error: function(){
+                console.log(" Something goes wrong!!");
+            }    
+        });
+        
+        
+        //SPORT ACTIVITY
+        $.ajax({
+            url: '/759app/'+7,
+            type: 'GET',
+            dataType:  "json",
+
+            success: function(json) {
+                //Getting MY activity
+                for (var i = 0 ; i<json.length ; i++){
+                    jsonReceived=json[i];
+                    thisRef.createJson();
+                    mySportStore.add(jsonModel);
+                }
+            },
+            
+            error: function(){
+                console.log(" Something goes wrong!!");
+            }    
+        });
+        
+        this.syncAndLoad();
+
     },
 
+
+    //Create a json with Model Format (from a json received)
+    createJson: function(){
+      jsonModel = {
+            id: jsonReceived.id,
+            date_activity: jsonReceived.date_activite,
+            name : jsonReceived.nom, 
+            start_time : jsonReceived.heure_debut,
+            stop_time : jsonReceived.heure_fin,
+            meeting_location : jsonReceived.lieu_rdv,
+            photo_activity : jsonReceived.photo_activite, 
+            actual_number : jsonReceived.nombre_actuel,
+            max_number : jsonReceived.nombre_max,
+            description : jsonReceived.description,
+            id_user : jsonReceived.id_user, 
+            id_status : jsonReceived.id_status,
+            title : jsonReceived.titre,
+            location : jsonReceived.lieu,
+            departure_location : jsonReceived.lieu_depart,
+            arrival_location : jsonReceived.lieu_arrivee,
+            cost : jsonReceived.prix
+        };
+     },
+
       
+      
+    getAllActivities: function(){
+        var thisRef=this;
+        this.syncAndLoad();
+
+        //Covoiturage = 125
+        //Culture = 489
+        //Sport = 759app
+                
+        //CARPOOL ACTIVITY
+        $.ajax({
+            url: "/125/",
+            type: 'GET',
+            dataType:  "json",
+
+            success: function(json) {
+                //Getting MY activity
+                for (var i = 0 ; i<json.length ; i++){
+                    
+                    jsonReceived=json[i];
+                    thisRef.createJson();
+                    carpoolStore.add(jsonModel);
+                }
+            },
+            
+            error: function(){
+                console.log(" Something goes wrong!!");
+            }    
+        });
+       
+        
+        
+                //CULTURAL ACTIVITY
+        $.ajax({
+            url: "/489/",
+            type: 'GET',
+            dataType:  "json",
+
+            success: function(json) {
+                //Getting MY activity
+                for (var i = 0 ; i<json.length ; i++){
+                    jsonReceived=json[i];
+                    thisRef.createJson();
+                    culturalStore.add(jsonModel);
+
+                }
+            },
+            
+            error: function(){
+                console.log(" Something goes wrong!!");
+            }    
+        });
+        
+                
+        //SPORT ACTIVITY
+        $.ajax({
+            url: '/759app/',
+            //url: '/759app/',
+            type: 'GET',
+            dataType:  "json",
+
+            success: function(json) {
+                //Getting all the activities
+                for (var i = 0 ; i<json.length ; i++){
+                    jsonReceived=json[i];
+                    thisRef.createJson();
+                    sportStore.add(jsonModel);
+                }
+            },
+            
+            error: function(){
+                console.log(" Something goes wrong ! to get all activity");
+            }    
+        });
+        
+       this.syncAndLoad();
+    },
+    
+    
+    syncAndLoad: function(){
+        myCarpoolStore.sync();
+        myCarpoolStore.load();
+        myCulturalStore.sync();
+        myCulturalStore.load();
+        mySportStore.sync();
+        mySportStore.load();
+        
+        carpoolStore.sync();
+        carpoolStore.load();
+        culturalStore.sync();
+        culturalStore.load();
+        sportStore.sync();
+        sportStore.load();
+    },
+    
     createSportActivityButtonTap: function() {  
         // retrieve values from the ref to the create activity
         var values = this.getCreatesportactivityref().getValues();
@@ -138,7 +376,7 @@ Ext.define('Lan.controller.controller', {
         this.getActivitystoreref().add(values);
         // reset the values
         this.getCreatesportactivityref().reset();
-        
+        this.syncAndLoad();
     },
     
     createCulturalActivityButtonTap: function() {  
@@ -187,6 +425,7 @@ Ext.define('Lan.controller.controller', {
         this.getActivitystoreref().add(values);
         this.getCreateculturalactivityref().reset();
         Ext.Msg.alert('Created', 'Cultural activity created !!');
+        this.syncAndLoad();
     },
             
     createCarpoolActivityButtonTap: function() {  
@@ -232,9 +471,10 @@ Ext.define('Lan.controller.controller', {
         //fin envoi nouvelle activité
         
         // add the model to the store if valid
-        this.getActivitystoreref().add(values);
+        myCarpoolStore.add(values);
         this.getCreatecarpoolactivityref().reset();
         Ext.Msg.alert('Created', 'Carpool Activity created !!');
+        this.syncAndLoad();
     },
       
     sportactivitytap: function (dataview, index, target, record, e, eOpts) {
@@ -253,64 +493,59 @@ Ext.define('Lan.controller.controller', {
         this.getDetailsportactivityref().getComponent('description').setHtml(record.getData().description);
 
 },
-
-    mysportactivitytap: function (dataview, index, target, record, e, eOpts) {
-       
-        Ext.Viewport.animateActiveItem({ xtype:'detailsportactivity'},{type:'slide'});
-        this.getDetailsportactivityref().setValues(record);
         
-        console.log("L'organisateur : "+record.getData().id_user);
+    mycarpoolactivitytap: function (dataview, index, target, record, e, eOpts) {
+        Ext.Viewport.animateActiveItem({ xtype:'detailmycarpoolactivity'},{type:'slide'});
+        this.getDetailmycarpoolactivityref().setValues(record);
         
         //We need to keep the same order in the view !
-        this.getDetailsportactivityref().getComponent('iduser').setHtml(record.getData().id_user);
-        this.getDetailsportactivityref().getComponent('starttime').setHtml(record.getData().start_time);
-        this.getDetailsportactivityref().getComponent('stoptime').setHtml(record.getData().stop_time);
-        this.getDetailsportactivityref().getComponent('location').setHtml(record.getData().location);
-        this.getDetailsportactivityref().getComponent('maxnumber').setHtml(record.getData().max_number);
-        this.getDetailsportactivityref().getComponent('description').setHtml(record.getData().description);
+        this.getDetailmycarpoolactivityref().getComponent('iduser').setHtml(record.getData().id_user);
+        this.getDetailmycarpoolactivityref().getComponent('starttime').setHtml(record.getData().start_time);
+        this.getDetailmycarpoolactivityref().getComponent('stoptime').setHtml(record.getData().stop_time);
+        this.getDetailmycarpoolactivityref().getComponent('location').setHtml(record.getData().location);
+        this.getDetailmycarpoolactivityref().getComponent('maxnumber').setHtml(record.getData().max_number);
+        this.getDetailmycarpoolactivityref().getComponent('description').setHtml(record.getData().description);
 
 },
+        
+     myculturalactivitytap: function (dataview, index, target, record, e, eOpts) {
+        console.log("1");
+        Ext.Viewport.animateActiveItem({ xtype:'detailmyculturalactivity'},{type:'slide'});
+        console.log("2");
+        this.getDetailmyculturalactivityref().setValues(record);
+        //We need to keep the same order in the view !
+        this.getDetailmyculturalactivityref().getComponent('iduser').setHtml(record.getData().id_user);
+        this.getDetailmyculturalactivityref().getComponent('starttime').setHtml(record.getData().start_time);
+        this.getDetailmyculturalactivityref().getComponent('stoptime').setHtml(record.getData().stop_time);
+        this.getDetailmyculturalactivityref().getComponent('location').setHtml(record.getData().location);
+        this.getDetailmyculturalactivityref().getComponent('maxnumber').setHtml(record.getData().max_number);
+        this.getDetailmyculturalactivityref().getComponent('description').setHtml(record.getData().description);
+        console.log("3");
+},
+
+    mysportactivitytap: function (dataview, index, target, record, e, eOpts) {
+        Ext.Viewport.animateActiveItem({ xtype:'detailmysportactivity'},{type:'slide'});
+        this.getDetailmysportactivityref().setValues(record);
+        
+        //We need to keep the same order in the view !
+        this.getDetailmysportactivityref().getComponent('iduser').setHtml(record.getData().id_user);
+        this.getDetailmysportactivityref().getComponent('starttime').setHtml(record.getData().start_time);
+        this.getDetailmysportactivityref().getComponent('stoptime').setHtml(record.getData().stop_time);
+        this.getDetailmysportactivityref().getComponent('location').setHtml(record.getData().location);
+        this.getDetailmysportactivityref().getComponent('maxnumber').setHtml(record.getData().max_number);
+        this.getDetailmysportactivityref().getComponent('description').setHtml(record.getData().description);
+
+},
+
        
        // Function called when the back button is pressed
        backToMyActivityTap: function() {  
-
-       /* var items,
-            current,
-            previous;
-
-        items = Ext.Viewport.getItems();
-
-        // We get the current and the previous view
-        current = items.get(items.length - 1);
-        previous = items.get(items.length - 2);
-
-        Ext.Viewport.on({
-            activeitemchange: 'onAfterAnimate',
-            scope: this,
-            single: true,
-            order: 'after',
-            args: [current]
-        });
-
-        Ext.Viewport.animateActiveItem(previous, {type: 'slide', direction: 'right'});*/
-
-        //Useful just to display a view (here the activityMain) !
-        //var item = Ext.getCmp('mainId');
-        //Ext.Viewport.animateActiveItem( item, {type: 'slide', direction: 'right'});
-        
         //To remove a view !
         Ext.Viewport.remove(Ext.Viewport.getActiveItem(),true);
-
     },
-    /*
-    onAfterAnimate: function(itemToDestroy) {
-        itemToDestroy.destroy();
-    }
-    */
     
     joinActivityTap: function() {  
-        socket.emit('my other event', { coucou: 'data', salut:'coi' });
-            Ext.Msg.alert('Joined', 'Méthode à implémenter !');
-    }
+        Ext.Msg.alert('Joined', 'Méthode à implémenter !');
+    },
     
 });

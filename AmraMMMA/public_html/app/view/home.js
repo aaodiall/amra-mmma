@@ -22,13 +22,10 @@ Ext.define("Lan.view.home", {
             xtype: 'mysportactivity'
         }, {
             title: 'Cultural',
-           
             style: 'background-color: #f6eb69',
             xtype: 'myculturalactivity'
         }, {
             title: 'Car-pooling',
-            
-            
             xtype: 'mycarpoolactivity'
         }]
   }
