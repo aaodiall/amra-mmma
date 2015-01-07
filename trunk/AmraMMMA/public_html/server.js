@@ -35,12 +35,16 @@ app.post('/', function(req, res){
   res.send(JSON.stringify(req.body));
 });
 
-app.get('/:type/:id_user',activity.all_activity_by_user);
+app.get('/myactivity/:type/:id_user',activity.all_activity_by_user);
 
-app.get('/:type',activity.all_activity);
+app.get('/allactivities/:type/:id_user',activity.all_activity);
+
+app.get('/:check',activity.all_activity);
 
 app.post('/createActivity',activity.create);
 app.post('/login',user.authentification);
+
+app.post('/joinActivity',activity.join_activity);
 
 
 http.createServer(app).listen(app.get('port'), function(){

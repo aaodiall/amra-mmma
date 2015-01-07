@@ -23,6 +23,7 @@ Ext.define("Lan.view.detailMySportActivity", {
             title: 'Détail de l\'activité',
             items:[{
                 xtype: 'button',
+                
                 ui: 'round', 
                 action: 'backToMyActivity',
                 text: 'Retour'
@@ -91,9 +92,22 @@ Ext.define("Lan.view.detailMySportActivity", {
             
              {
                 xtype: 'button',
-                text: 'Rejoindre l\'activité',
+                id:'mysportbtnleave',
+                text: 'Quitter l\'activité',
                 action: 'joinActivity',
                 ui: 'action',
+                height:60,
+                width:300,
+                margin: '50 10 0 100', //Haut, Bas, Droite, Gauche
+                align: 'center'
+            },
+            
+            {
+                xtype: 'button',
+                id:'mysportbtndelete',
+                text: 'Supprimer l\'activité',
+                action: 'deleteActivity',
+                ui: 'decline',
                 height:60,
                 width:300,
                 margin: '50 10 0 100', //Haut, Bas, Droite, Gauche

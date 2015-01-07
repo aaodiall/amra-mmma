@@ -11,7 +11,8 @@ Ext.application({
     views: ['activityMain','activityTab','culturalActivity','sportActivity','carpoolActivity',
         'home','myCulturalActivity','mySportActivity','myCarpoolActivity','createSportActivity',
         'createCulturalActivity','createCarpoolActivity','login','detailSportActivity',
-        'detailMyCarpoolActivity','detailMyCulturalActivity','detailMySportActivity','login'],
+        'detailCulturalActivity','detailCarpoolActivity','detailMyCarpoolActivity',
+        'detailMyCulturalActivity','detailMySportActivity','login'],
     
     controllers: ['controller'],
     stores: ['activityStore','myCarpoolActivityStore','myCulturalActivityStore','mySportActivityStore',
