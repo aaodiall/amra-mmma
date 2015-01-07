@@ -88,9 +88,22 @@ Ext.define("Lan.view.detailMyCulturalActivity", {
             
              {
                 xtype: 'button',
-                text: 'Rejoindre l\'activité',
+                id:'myculturalbtnleave',
+                text: 'Quitter l\'activité',
                 action: 'joinActivity',
                 ui: 'action',
+                height:60,
+                width:300,
+                margin: '50 10 0 100', //Haut, Bas, Droite, Gauche
+                align: 'center'
+            },
+            
+            {
+                xtype: 'button',
+                id:'myculturalbtndelete',
+                text: 'Supprimer l\'activité',
+                action: 'deleteActivity',
+                ui: 'decline',
                 height:60,
                 width:300,
                 margin: '50 10 0 100', //Haut, Bas, Droite, Gauche

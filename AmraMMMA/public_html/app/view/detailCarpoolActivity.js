@@ -2,26 +2,108 @@ Ext.define("Lan.view.detailCarpoolActivity", {
     extend: 'Ext.form.Panel',
     xtype: 'detailcarpoolactivity',
     config: {
+        title: 'Titre de l\'activité',
+        id: 'idCarpoolDetail',
           layout: {
             type: 'vbox',
             align : 'stretch',
             pack  : 'start',
+            animation: {
+                type: 'slide',
+                direction: 'right'
+            }
             },
-          items: [
-            {html: 'Nom de l\'organisateur : <br/>\n\
-                    Lieu de rendez-vous : <br/>\n\
-                    Lieu de départ : <br/>\n\
-                    Lieu d\'arrivé : <br/>\n\
-                    Prix : <br/>\n\
-                    Heure du début de l\'activité : <br/>\n\
-                    Heure de fin de l\'activité : <br/>\n\
-                    Nombre maximal de personnes<br/>\n\
-                    Nombre actuel de personnes<br/>\n\
-                    ', flex:1},
+
+        items: [
+         {
+            maxDrag: 400,
+            xtype: 'toolbar',
+            docked: 'top',
+            title: 'Détail de l\'activité',
+            items:[{
+                xtype: 'button',
+                ui: 'round', 
+                action: 'backToMyActivity',
+                text: 'Revenir aux activités'
+            }]
+          },
             
-            {html:'Description de l\évènement<br/><br/><br/>', height:150},
+            {
+                html:'<b> Nom de l\'organisateur : </b>'
+            },
+            {
+                xtype:'label',
+                itemId:'iduser'
+            },
             
-            {html:'Image de l\'évènement', flex:2}
+            
+            
+            {
+                html:'<br><b> Heure de debut de l\'activité : </b>'
+            },
+            {
+                xtype:'label',
+                itemId:'starttime'
+            },
+            
+            
+            
+            {
+                html:'<br><b> Heure de fin de l\'activité : </b>'
+            },
+            {
+                xtype:'label',
+                itemId:'stoptime'
+            },
+            
+            
+            
+            {
+                html:'<br><b> Lieu de l\'activité : </b>'
+            },
+            {
+                xtype:'label',
+                itemId:'location'
+            },
+            
+            
+            
+            {
+                html:'<br><b> Nombre max de personnes : </b>'
+            },
+            {
+                xtype:'label',
+                itemId:'maxnumber'
+            },
+            
+            
+            
+            {
+                html:'<br><b> Description de l\'activité : </b>'
+            },
+            {
+                xtype:'label',
+                itemId:'description'
+            },
+            
+             {
+                xtype: 'button',
+                text: 'Rejoindre l\'activité',
+                action: 'joinActivity',
+                ui: 'action',
+                height:60,
+                width:300,
+                margin: '50 10 0 100', //Haut, Bas, Droite, Gauche
+                align: 'center'
+            }
+           
           ]
-        }
+        },
+        
+         initialize: function(){
+           this.callParent();
+
+           //  record is visible
+           console.log("ICI : "+this.config.record);
+         }
 });
