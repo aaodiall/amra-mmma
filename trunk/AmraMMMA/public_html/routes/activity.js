@@ -4,6 +4,7 @@ var mysql = require('mysql');
  var connection = mysql.createConnection({
     host     : 'localhost',
   user     : 'root',
+  password: 'alphanicolala',
   database: 'amra_mmma'
 });
  
@@ -57,6 +58,7 @@ exports.all_activity = function(req, res){
 exports.all_activity_by_user = function(req, res){
      var type=req.params.type;
      var id_user=req.params.id_user;
+     var id_status_delete=3;
      var table = null;
      var myActivities = [];
      /*var id_status_delete=3;
@@ -180,6 +182,44 @@ exports.join_activity = function(req,res){
 
 /*quit activity */
 exports.quit_activity = function(req,res){
+    
+    var input = JSON.parse(JSON.stringify(req.body));
+    var resultQuit={
+        result:'0'
+    };
+    console.log("reqbody : "+input.id_activity+ " type "+input.type_activity);
+    
+        connection.query('DELETE FROM '+input.type_activity+'_join WHERE id_activite='+input.id_activity+' \n\
+        and  id_user='+input.id_user , function(err, rows)
+        {
+            if(err){
+                 console.log("Error quit activity : %s ",err );
+            }else{
+                //UPDATE images SET counter=counter+1 WHERE image_id=15
+                var query = connection.query('UPDATE '+input.type_activity+' SET nombre_actuel= nombre_actuel-1'+
+                        ' WHERE id=?',[input.id_activity] ,function(err,rows)
+                       {
+                           if(err){
+                                console.log("Error while decrementing the nombre_actuel : %s ",err );
+                           }else{
+                                resultQuit.result='1';
+                                res.send(resultQuit); 
+                                 console.log('result :'+ resultQuit.result);
+                           }
+                       
+                        });
+                
+               
+              
+            }
+               
+          
+        });
+    
+    
+    
+    
+  /*  
     var id_user = req.params.id_user;
     var id_activity = req.params.id_activity;
     var activity;
@@ -205,7 +245,7 @@ exports.quit_activity = function(req,res){
                 console.log("Error Updating : %s ",err );
             res.send('json');
             //res.redirect('/users');
-        }); 
+        }); */
 };
 
 /*Create an activity*/
@@ -296,7 +336,8 @@ exports.create = function(req,res){
             nombre_actuel:input.actual_number,
             nombre_max:input.max_number,
             description:input.description,
-            id_user:input.id_user,
+            id_user:1,
+             //input.id_user
             id_status:1,
             nom:input.name,
             titre:input.title,
@@ -322,14 +363,24 @@ exports.create = function(req,res){
     }      
 };
 
-exports.delete_activite = function(req,res){
-    var id = req.params.id;
+exports.delete_activity = function(req,res){
+   var input = JSON.parse(JSON.stringify(req.body));
+    var resultDeleting={
+        result:'0'
+    };
+    console.log("reqbody : "+input.id_activity+ " type "+input.type_activity);
     
-        connection.query("DELETE FROM activite WHERE id = ? ",[id], function(err, rows)
+        connection.query('DELETE FROM '+input.type_activity+' WHERE id='+input.id_activity, function(err, rows)
         {
-            if(err)
-                console.log("Error deleting : %s ",err );
-            res.send('json');
+            if(err){
+                 console.log("Error deleting : %s ",err );
+            }else{
+                resultDeleting.result='1';
+                console.log('result :'+ resultDeleting.result);
+                res.send(resultDeleting);
+            }
+               
+          
         });
     
 };

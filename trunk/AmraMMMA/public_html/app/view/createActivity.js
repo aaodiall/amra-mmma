@@ -4,7 +4,10 @@ Ext.define("Lan.view.createActivity", {
     config: {
           title: 'Home',
           iconCls: 'user',
-          scrollable: 'vertical',
+          scrollable : {
+            direction     : 'vertical',
+            directionLock : true
+        },
           items: [
           {
             xtype: 'toolbar',

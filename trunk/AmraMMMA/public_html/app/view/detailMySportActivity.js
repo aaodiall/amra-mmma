@@ -4,7 +4,7 @@ Ext.define("Lan.view.detailMySportActivity", {
     config: {
         title: 'Titre de l\'activité',
         id: 'idMySportDetail',
-
+        scrollable: 'vertical',
        layout: {
             type: 'vbox',
             align : 'stretch',
@@ -26,80 +26,110 @@ Ext.define("Lan.view.detailMySportActivity", {
                 
                 ui: 'round', 
                 action: 'backToMyActivity',
-                text: 'Retour'
+                text: '<'
             }]
           },
-            
+           /* {
+                html:'<b> Nom de l\'organisateur : </b>'
+            },*/
             {
-                html:'<p style="border-style:double; border-color:#F5DA81; background:#F5ECCE">'+
-                '<b> Nom de l\'organisateur : </b>'+
-                '</p>'
+                xtype:'textfield',
+                label:'organisateur',
+                itemId:'iduser',
+                readOnly: true
+                
             },
             {
-                xtype:'label',
-                itemId:'iduser'
+                xtype: "spacer",
+                height:2
             },
             
             
-            
-            {
+           /* {
                 html:'<br><b> Heure de debut de l\'activité : </b>'
-            },
+            },*/
             {
-                xtype:'label',
-                itemId:'starttime'
+                xtype:'textfield',
+                label:'Debut',
+                itemId:'starttime',
+                readOnly: true
+                
+            },
+            
+            {
+                xtype: "spacer",
+                height:2
             },
             
             
-            
-            {
+           /* {
                 html:'<br><b> Heure de fin de l\'activité : </b>'
-            },
+            },*/
             {
-                xtype:'label',
-                itemId:'stoptime'
+                xtype:'textfield',
+                label:'Fin',
+                itemId:'stoptime',
+                readOnly: true
+            },
+            
+            {
+                xtype: "spacer",
+                height:2
             },
             
             
-            
-            {
+           /* {
                 html:'<br><b> Lieu de l\'activité : </b>'
-            },
+            },*/
             {
-                xtype:'label',
-                itemId:'location'
+                xtype:'textfield',
+                label:'Lieu',
+                itemId:'location',
+                readOnly: true
+            },
+            
+            {
+                xtype: "spacer",
+                height:2
             },
             
             
-            
-            {
+            /*{
                 html:'<br><b> Nombre max de personnes : </b>'
-            },
+            },*/
             {
-                xtype:'label',
-                itemId:'maxnumber'
+               xtype:'textfield',
+                label:'Places',
+                itemId:'maxnumber',
+                readOnly: true
             },
             
             
-            
             {
+                xtype: "spacer",
+                height:2
+            },
+            
+           /* {
                 html:'<br><b> Description de l\'activité : </b>'
-            },
+            },*/
             {
-                xtype:'label',
-                itemId:'description'
+                xtype:'textfield',
+                label:'Description',
+                itemId:'description',
+                readOnly: true
             },
             
              {
                 xtype: 'button',
                 id:'mysportbtnleave',
                 text: 'Quitter l\'activité',
-                action: 'joinActivity',
-                ui: 'action',
-                height:60,
+                action: 'quitActivity',
+                ui: 'action'
+                /*height:60,
                 width:300,
                 margin: '50 10 0 100', //Haut, Bas, Droite, Gauche
-                align: 'center'
+                align: 'center'*/
             },
             
             {
@@ -107,16 +137,18 @@ Ext.define("Lan.view.detailMySportActivity", {
                 id:'mysportbtndelete',
                 text: 'Supprimer l\'activité',
                 action: 'deleteActivity',
-                ui: 'decline',
-                height:60,
+                ui: 'decline'
+              /*  height:60,
                 width:300,
                 margin: '50 10 0 100', //Haut, Bas, Droite, Gauche
-                align: 'center'
+                align: 'center'*/
             }
            
           ]
+          
+            
         },
-        
+       
          initialize: function(){
            this.callParent();
 
