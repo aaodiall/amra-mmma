@@ -174,7 +174,7 @@ Ext.define('Lan.controller.controller', {
         this.syncAndLoad();
         var localId = localStorage.getItem('localid');
         // localId=1;
-        console.log("a"+localId);
+        // 
         //Covoiturage = 125
         //Culture = 489
         //Sport = 759app
@@ -188,18 +188,15 @@ Ext.define('Lan.controller.controller', {
             success: function(json) {
                 //Getting MY activity
                 
-                for (var i = 0 ; i<json.length ; i++){
-                    if(json[0].length !== 0){
-                        jsonReceived=json[0][i];
-                        thisRef.createJson();
-                        myCarpoolStore.add(jsonModel);
-                    }
-                    
-                    if(json[1].length !== 0){
-                        jsonReceived=json[1][i];
-                        thisRef.createJson();
-                        myCarpoolStore.add(jsonModel);  
-                    }
+                for (var i = 0 ; i<json[0].length ; i++){ 
+                    jsonReceived=json[0][i];
+                    thisRef.createJson();
+                    myCarpoolStore.add(jsonModel);
+                } 
+                for (var i = 0 ; i<json[1].length ; i++){
+                    jsonReceived=json[1][i];
+                    thisRef.createJson();
+                    myCarpoolStore.add(jsonModel);
                 }
                 
             },
@@ -218,17 +215,15 @@ Ext.define('Lan.controller.controller', {
 
             success: function(json) {
                 //Getting MY activity
-                for (var i = 0 ; i<json.length ; i++){
-                    if(json[0].length !== 0){
-                        jsonReceived=json[0][i];
-                        thisRef.createJson();
-                        myCulturalStore.add(jsonModel);
-                    }
-                    if(json[1].length !== 0){
-                        jsonReceived=json[1][i];
-                        thisRef.createJson();
-                        myCulturalStore.add(jsonModel);
-                    }
+                for (var i = 0 ; i<json[0].length ; i++){ 
+                    jsonReceived=json[0][i];
+                    thisRef.createJson();
+                    myCulturalStore.add(jsonModel);
+                } 
+                for (var i = 0 ; i<json[1].length ; i++){
+                    jsonReceived=json[1][i];
+                    thisRef.createJson();
+                    myCulturalStore.add(jsonModel);
                 }
                 
             },
@@ -247,18 +242,16 @@ Ext.define('Lan.controller.controller', {
 
             success: function(json) {
                 //Getting MY activity
-                console.log("vuuue "+JSON.stringify(json));
-                for (var i = 0 ; i<json.length ; i++){
-                    if(json[0].length !== 0){
-                        jsonReceived=json[0][i];
-                        thisRef.createJson();
-                        mySportStore.add(jsonModel);
-                    } 
-                    if(json[1].length !== 0){
-                        jsonReceived=json[1][i];
-                        thisRef.createJson();
-                        mySportStore.add(jsonModel);
-                    }
+                
+                for (var i = 0 ; i<json[0].length ; i++){ 
+                    jsonReceived=json[0][i];
+                    thisRef.createJson();
+                    mySportStore.add(jsonModel);
+                } 
+                for (var i = 0 ; i<json[1].length ; i++){
+                    jsonReceived=json[1][i];
+                    thisRef.createJson();
+                    mySportStore.add(jsonModel);
                 }
             },
             
@@ -392,7 +385,6 @@ Ext.define('Lan.controller.controller', {
                     
                     jsonReceived=json[i];
                     thisRef.createJson();
-                    console.log("boubou "+jsonModel.id);
                     carpoolStore.add(jsonModel);
                 }
             },
@@ -616,32 +608,10 @@ Ext.define('Lan.controller.controller', {
         Ext.Msg.alert('Created', 'Carpool Activity created !!');
         //this.syncAndLoad();
     },
-      
+     
+    
     sportactivitytap: function (dataview, index, target, record, e, eOpts) {
        
-        //Check if the activity is already joined or not
-        /*$.ajax({
-            url: '/check/',
-            type: 'GET',
-            dataType:  "json",
-
-            success: function(json) {
-                //Getting all the activities
-                for (var i = 0 ; i<json.length ; i++){
-                    jsonReceived=json[i];
-                    thisRef.createJson();
-                    sportStore.add(jsonModel);
-                    console.log("JSON : "+JSON.stringify(jsonModel));
-
-                }
-            },
-            
-            error: function(){
-                console.log(" Something goes wrong ! to get all activity");
-            }    
-        });
-         */
-        
         Ext.Viewport.animateActiveItem({ xtype:'detailsportactivity'},{type:'slide'});
         this.getDetailsportactivityref().setValues(record);
         
@@ -659,29 +629,6 @@ Ext.define('Lan.controller.controller', {
     },
             
     culturalactivitytap: function (dataview, index, target, record, e, eOpts) {
-       
-        //Check if the activity is already joined or not
-        /*$.ajax({
-            url: '/check/',
-            type: 'GET',
-            dataType:  "json",
-
-            success: function(json) {
-                //Getting all the activities
-                for (var i = 0 ; i<json.length ; i++){
-                    jsonReceived=json[i];
-                    thisRef.createJson();
-                    sportStore.add(jsonModel);
-                    console.log("JSON : "+JSON.stringify(jsonModel));
-
-                }
-            },
-            
-            error: function(){
-                console.log(" Something goes wrong ! to get all activity");
-            }    
-        });
-         */
         
         Ext.Viewport.animateActiveItem({ xtype:'detailculturalactivity'},{type:'slide'});
         this.getDetailculturalactivityref().setValues(record);
@@ -700,30 +647,7 @@ Ext.define('Lan.controller.controller', {
     },
             
     carpoolactivitytap: function (dataview, index, target, record, e, eOpts) {
-       
-        //Check if the activity is already joined or not
-        /*$.ajax({
-            url: '/check/',
-            type: 'GET',
-            dataType:  "json",
-
-            success: function(json) {
-                //Getting all the activities
-                for (var i = 0 ; i<json.length ; i++){
-                    jsonReceived=json[i];
-                    thisRef.createJson();
-                    sportStore.add(jsonModel);
-                    console.log("JSON : "+JSON.stringify(jsonModel));
-
-                }
-            },
-            
-            error: function(){
-                console.log(" Something goes wrong ! to get all activity");
-            }    
-        });
-         */
-        
+              
         Ext.Viewport.animateActiveItem({ xtype:'detailcarpoolactivity'},{type:'slide'});
         this.getDetailcarpoolactivityref().setValues(record);
         
@@ -745,7 +669,6 @@ Ext.define('Lan.controller.controller', {
     mycarpoolactivitytap: function (dataview, index, target, record, e, eOpts) {
         var localId = localStorage.getItem('localid');
         // localId=1;
-        console.log("a "+localId+" b "+record.get('id_user'));
         
         Ext.Viewport.animateActiveItem({ xtype:'detailmycarpoolactivity'},{type:'slide'});
         this.getDetailmycarpoolactivityref().setValues(record);
@@ -769,7 +692,6 @@ Ext.define('Lan.controller.controller', {
     myculturalactivitytap: function (dataview, index, target, record, e, eOpts) {
         var localId = localStorage.getItem('localid');
        
-        console.log("a"+localId);
         
         Ext.Viewport.animateActiveItem({ xtype:'detailmyculturalactivity'},{type:'slide'});
         
@@ -793,7 +715,6 @@ Ext.define('Lan.controller.controller', {
     mysportactivitytap: function (dataview, index, target, record, e, eOpts) {
         var localId = localStorage.getItem('localid');
         // localId=1;
-        console.log("a"+localId);
         
         Ext.Viewport.animateActiveItem({ xtype:'detailmysportactivity'},{type:'slide'});
         this.getDetailmysportactivityref().setValues(record);
@@ -805,7 +726,10 @@ Ext.define('Lan.controller.controller', {
         }
         
         //We need to keep the same order in the view !
-        this.getDetailmysportactivityref().getComponent('iduser').setHtml(record.getData().id_user);
+        //this.getDetailmysportactivityref().getComponent('iduser').setHtml(record.getData().id_user);
+        this.getDetailmysportactivityref().getComponent('title').setHtml(record.getData().title);
+        this.getDetailmysportactivityref().getComponent('date_activity').setHtml(record.getData().date_activity);
+        this.getDetailmysportactivityref().getComponent('meeting_location').setHtml(record.getData().meeting_location);
         this.getDetailmysportactivityref().getComponent('starttime').setHtml(record.getData().start_time);
         this.getDetailmysportactivityref().getComponent('stoptime').setHtml(record.getData().stop_time);
         this.getDetailmysportactivityref().getComponent('location').setHtml(record.getData().location);
@@ -874,8 +798,19 @@ Ext.define('Lan.controller.controller', {
                 if (json.result == 1){                    
                     //Ext.Viewport.animateActiveItem({ xtype:'login'},{type:'slide'});
                     Ext.Msg.alert('Succès', 'Vous avez bien rejoint l\'activité');
-                    Ext.Viewport.remove(Ext.Viewport.getActiveItem(),true);
-                    thisref.reloadmyactivities();
+                    if(Ext.Viewport.getActiveItem().xtype == 'detailsportactivity'){
+                        thisref.getDetailsportactivityref().getComponent('sportbtnjoin').setDisabled(true);
+                    }
+                    if(Ext.Viewport.getActiveItem().xtype == 'detailculturalactivity'){
+                        thisref.getDetailculturalactivityref().getComponent('culturalbtnjoin').setDisabled(true); 
+                    }
+                    if(Ext.Viewport.getActiveItem().xtype == 'detailcarpoolactivity'){
+                        thisref.getDetailcarpoolactivityref().getComponent('carpoolbtnjoin').setDisabled(true); 
+                    }
+                    
+                    //Ext.Viewport.remove(Ext.Viewport.getActiveItem(),true);
+                    thisref.connectionOk();
+                    //thisref.reloadmyactivities();
                     
                 }
                 else {

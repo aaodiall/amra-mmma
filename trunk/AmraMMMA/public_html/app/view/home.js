@@ -18,14 +18,15 @@ Ext.define("Lan.view.home", {
         {
             title: 'Sport',
             iconCls: 'user', iconMask: true,
-            style: 'background-color: #ea8467; color: white',
+            style: 'background-color: #F6E3CE; color: white',
             xtype: 'mysportactivity'
         }, {
             title: 'Cultural',
-            style: 'background-color: #f6eb69',
+            style: 'background-color: #E0E0F8',
             xtype: 'myculturalactivity'
         }, {
             title: 'Car-pooling',
+            style: 'background-color: #F2F5A9; color: white',
             xtype: 'mycarpoolactivity'
         }]
   }

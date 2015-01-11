@@ -85,7 +85,7 @@ Ext.define('Lan.view.activityMain', {
             }]
          
         },{
-          title: 'Autres activités',
+          title: 'Toutes les activités',
           leaf: true,
           slideButton: {
                 selector: 'toolbar'

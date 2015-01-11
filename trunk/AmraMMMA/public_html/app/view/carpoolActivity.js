@@ -6,7 +6,7 @@ Ext.define("Lan.view.carpoolActivity", {
           grouped: true,
          
           itemTpl: '<div class="myPicture">' +
-        '<img src="http://upload.wikimedia.org/wikipedia/commons/9/98/RomanA-01.svg" alt="picture" />' +
+        '<img src="http://img15.hostingpics.net/pics/677458covoiturage2g.png"  height="55" width="60" alt="picture" />' +
         '</div>' +
         '<div class="myContent">'+
         '<div><b>Lieu départ : </b>{departure_location} et Lieu arrivée : {arrival_location}<br>'+

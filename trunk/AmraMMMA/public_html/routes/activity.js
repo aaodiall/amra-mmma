@@ -4,7 +4,7 @@ var mysql = require('mysql');
  var connection = mysql.createConnection({
     host     : 'localhost',
   user     : 'root',
-  password: 'alphanicolala',
+  //password: 'alphanicolala',
   database: 'amra_mmma'
 });
  
@@ -109,37 +109,38 @@ exports.join_activity = function(req,res){
     var resultJoin={
         result:'0'
     };
-    console.log("reqbody : "+input.id_user+"  "+ input.id_activity+ " type "+input.type_activity);
     
-        
-    var query = connection.query('SELECT `nombre_actuel`, `nombre_max`\n\
-            FROM '+input.type_activity+' WHERE id=?',[input.id_activity],function(err,rows)
+     
+    //Check if it's not already joined
+    var query = connection.query('SELECT * FROM '+input.type_activity+'_join'+' WHERE id_user='+input.id_user+' and id_activite='+input.id_activity,function(err,rows)
         {
             if(err)
                 console.log("Error Selecting !! : %s ",err );
             
-            var rowsNumber = JSON.parse(JSON.stringify(rows));
+       
+        //If the activity not joined yet
+        if(JSON.stringify(rows) == "[]"){
 
-            //NOMBRE OK
-            if(rows[0].nombre_actuel < rows[0].nombre_max){
+            //Check the number            
+            var query = connection.query('SELECT `nombre_actuel`, `nombre_max`\n\
+                    FROM '+input.type_activity+' WHERE id=?',[input.id_activity],function(err,rows){
+                if(err)
+                    console.log("Error Selecting !! : %s ",err );
+
+                var rowsNumber = JSON.parse(JSON.stringify(rows));
+
+                //NOMBRE OK
+                if(rows[0].nombre_actuel < rows[0].nombre_max){
                     var query = connection.query('INSERT INTO '+input.type_activity+'_join (`id_user`, `id_activite`)\n\
                         VALUES ('+input.id_user+','+input.id_activity+')',function(err,rows)
                     {
                         if(err){
                             console.log("Error Selecting : %s ",err.toString() );
-                            if (err.toString() == 'Error: ER_DUP_ENTRY: Duplicate entry \''+input.id_user+'-'+input.id_activity+'\' for key \'PRIMARY\'')
-                            { 
-                                console.log("Erreur, activité déjà rejointe !");
-                                resultJoin.result='2';
-                                res.send(resultJoin); 
-                            }
                         }
                     });
-                
-                 if (!(resultJoin.result == 2)){
+
                     //UPDATE ICI DU NOMBRE ACTUEL !
                     var newNombreActuel = (rows[0].nombre_actuel)+1;
-                    console.log("houra "+ newNombreActuel+" aa "+input.id_activity);
                     var query = connection.query('UPDATE '+input.type_activity+' SET `nombre_actuel`='+newNombreActuel+
                         ' WHERE id=?',[input.id_activity] ,function(err,rows)
                        {
@@ -149,35 +150,22 @@ exports.join_activity = function(req,res){
                         resultJoin.result='1';
                         res.send(resultJoin); 
                         });
-                 }
-             //NOMBRE NON OK
-             } else {
-                console.log("dans le non ok")
-                resultJoin.result='0';
-                res.send(resultJoin); 
-            }
-        });
-        /*
-        if(activity.nombre_actuel < activity.nombre_max){
-            activity.nombre_actuel=activity.nombre_actuel+1;
-            connection.query("INSERT INTO activite_join set ? ",id, function(err, rows)
-        {
-            if(err)
-                console.log("Error inserting : %s ",err );
-            
-        });
-        connection.query("UPDATE activite set ? WHERE id = ? ",[activity,id_activity], function(err, rows)
-        {
-            if (err)
-                console.log("Error Updating : %s ",err );
-            res.send('json');
-            //res.redirect('/users');
-        });    
-
-        }else{
-            res.send('nombre max atteint');
-
-        }*/
+                            
+                 //NOMBRE NON OK
+                } else {
+                    console.log("dans le non ok")
+                    resultJoin.result='0';
+                    res.send(resultJoin); 
+                }
+            });
+               
+        //Si déjà rejoint !
+        } else {
+            resultJoin.result='2';
+            console.log("Activity already joined.");
+            res.send(resultJoin); 
+        }
+    });
 };
 
 /*quit activity */
@@ -204,7 +192,7 @@ exports.quit_activity = function(req,res){
                            }else{
                                 resultQuit.result='1';
                                 res.send(resultQuit); 
-                                 console.log('result :'+ resultQuit.result);
+                                console.log('result :'+ resultQuit.result);
                            }
                        
                         });
