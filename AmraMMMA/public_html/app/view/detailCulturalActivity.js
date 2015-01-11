@@ -24,77 +24,116 @@ Ext.define("Lan.view.detailCulturalActivity", {
                 xtype: 'button',
                 ui: 'round', 
                 action: 'backToMyActivity',
-                text: 'Revenir aux activités'
+                text: '<'
             }]
           },
-            
-            {
+            /* {
                 html:'<b> Nom de l\'organisateur : </b>'
+            },*/
+            {
+                xtype:'textfield',
+                label:'organisateur',
+                itemId:'iduser',
+                readOnly: true
+                
             },
             {
-                xtype:'label',
-                itemId:'iduser'
+                xtype: "spacer",
+                height:2
             },
             
             
-            
-            {
+           /* {
                 html:'<br><b> Heure de debut de l\'activité : </b>'
-            },
+            },*/
             {
-                xtype:'label',
-                itemId:'starttime'
+                xtype:'textfield',
+                label:'Debut',
+                itemId:'starttime',
+                readOnly: true
+                
+            },
+            
+            {
+                xtype: "spacer",
+                height:2
             },
             
             
-            
-            {
+           /* {
                 html:'<br><b> Heure de fin de l\'activité : </b>'
-            },
+            },*/
             {
-                xtype:'label',
-                itemId:'stoptime'
+                xtype:'textfield',
+                label:'Fin',
+                itemId:'stoptime',
+                readOnly: true
+            },
+            
+            {
+                xtype: "spacer",
+                height:2
             },
             
             
-            
-            {
+           /* {
                 html:'<br><b> Lieu de l\'activité : </b>'
-            },
+            },*/
             {
-                xtype:'label',
-                itemId:'location'
+                xtype:'textfield',
+                label:'Lieu',
+                itemId:'location',
+                readOnly: true
+            },
+            
+            {
+                xtype: "spacer",
+                height:2
             },
             
             
-            
-            {
+            /*{
                 html:'<br><b> Nombre max de personnes : </b>'
-            },
+            },*/
             {
-                xtype:'label',
-                itemId:'maxnumber'
+               xtype:'textfield',
+                label:'Places',
+                itemId:'maxnumber',
+                readOnly: true
+            },
+            
+            {
+                xtype: "spacer",
+                height:2
             },
             
             
-            
-            {
+           /* {
                 html:'<br><b> Description de l\'activité : </b>'
+            },*/
+            {
+                xtype:'textfield',
+                label:'Description',
+                itemId:'description',
+                readOnly: true
             },
             {
-                xtype:'label',
-                itemId:'description'
+                xtype: "spacer",
+                height:2
             },
             
              {
-                xtype: 'button',
-                text: 'Rejoindre l\'activité',
-                action: 'joinActivity',
-                ui: 'action',
-                height:60,
-                width:300,
-                margin: '50 10 0 100', //Haut, Bas, Droite, Gauche
-                align: 'center'
+                 xtype: 'button',
+                id:'culturalbtnjoin',
+                text: 'Joindre l\'activité',
+                /*iconCls: 'add',
+                iconMask: true,*/
+                action: 'joinActivity'
+               /* ui: 'action',
+                height:'10%',
+                width:'15%',
+                margin: '25 10 0 5', //Haut, Bas, Droite, Gauche
+                align: 'center'*/
             }
            
           ]

@@ -45,6 +45,9 @@ app.post('/createActivity',activity.create);
 app.post('/login',user.authentification);
 
 app.post('/joinActivity',activity.join_activity);
+app.post('/deleteActivity',activity.delete_activity);
+app.post('/quitActivity',activity.quit_activity);
+
 
 
 http.createServer(app).listen(app.get('port'), function(){

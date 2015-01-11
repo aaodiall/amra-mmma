@@ -4,7 +4,11 @@ Ext.define("Lan.view.detailSportActivity", {
     config: {
         title: 'Titre de l\'activité',
         id: 'idSportDetail',
-          layout: {
+        scrollable : {
+            direction     : 'vertical',
+            directionLock : true
+        },
+        layout: {
             type: 'vbox',
             align : 'stretch',
             pack  : 'start',
@@ -12,98 +16,136 @@ Ext.define("Lan.view.detailSportActivity", {
                 type: 'slide',
                 direction: 'right'
             }
-            },
-
-        items: [
-         {
-            maxDrag: 400,
-            xtype: 'toolbar',
-            docked: 'top',
-            title: 'Détail de l\'activité',
-            items:[{
-                xtype: 'button',
-                ui: 'round', 
-                action: 'backToMyActivity',
-                text: 'Revenir aux activités'
-            }]
-          },
-            
-            {
-                html:'<b> Nom de l\'organisateur : </b>'
-            },
-            {
-                xtype:'label',
-                itemId:'iduser'
-            },
-            
-            
-            
-            {
-                html:'<br><b> Heure de debut de l\'activité : </b>'
-            },
-            {
-                xtype:'label',
-                itemId:'starttime'
-            },
-            
-            
-            
-            {
-                html:'<br><b> Heure de fin de l\'activité : </b>'
-            },
-            {
-                xtype:'label',
-                itemId:'stoptime'
-            },
-            
-            
-            
-            {
-                html:'<br><b> Lieu de l\'activité : </b>'
-            },
-            {
-                xtype:'label',
-                itemId:'location'
-            },
-            
-            
-            
-            {
-                html:'<br><b> Nombre max de personnes : </b>'
-            },
-            {
-                xtype:'label',
-                itemId:'maxnumber'
-            },
-            
-            
-            
-            {
-                html:'<br><b> Description de l\'activité : </b>'
-            },
-            {
-                xtype:'label',
-                itemId:'description'
-            },
-            
-             {
-                xtype: 'button',
-                text: 'Rejoindre l\'activité',
-                action: 'joinActivity',
-                ui: 'action',
-                height:60,
-                width:300,
-                margin: '50 10 0 100', //Haut, Bas, Droite, Gauche
-                align: 'center'
-            }
-           
-          ]
         },
         
-         initialize: function(){
-           this.callParent();
-
-           //  record is visible
-           console.log("ICI : "+this.config.record);
-         }
+        items: [
+            {
+                maxDrag: 400,
+                xtype: 'toolbar',
+                docked: 'top',
+                title: 'Détail de l\'activité',
+                items:[{
+                        xtype: 'button',
+                        ui: 'round', 
+                        action: 'backToMyActivity',
+                        text: '<'
+                    }]
+            },
+            
+           /* {
+                html:'<b> Nom de l\'organisateur : </b>'
+            },*/
+            {
+                xtype:'textfield',
+                label:'organisateur',
+                itemId:'iduser',
+                readOnly: true
+                
+            },
+            {
+                xtype: "spacer",
+                height:2
+            },
+            
+            
+           /* {
+                html:'<br><b> Heure de debut de l\'activité : </b>'
+            },*/
+            {
+                xtype:'textfield',
+                label:'Debut',
+                itemId:'starttime',
+                readOnly: true
+                
+            },
+            
+            {
+                xtype: "spacer",
+                height:2
+            },
+            
+            
+           /* {
+                html:'<br><b> Heure de fin de l\'activité : </b>'
+            },*/
+            {
+                xtype:'textfield',
+                label:'Fin',
+                itemId:'stoptime',
+                readOnly: true
+            },
+            
+            {
+                xtype: "spacer",
+                height:2
+            },
+            
+            
+           /* {
+                html:'<br><b> Lieu de l\'activité : </b>'
+            },*/
+            {
+                xtype:'textfield',
+                label:'Lieu',
+                itemId:'location',
+                readOnly: true
+            },
+            
+            {
+                xtype: "spacer",
+                height:2
+            },
+            
+            
+            /*{
+                html:'<br><b> Nombre max de personnes : </b>'
+            },*/
+            {
+               xtype:'textfield',
+                label:'Places',
+                itemId:'maxnumber',
+                readOnly: true
+            },
+            
+            {
+                xtype: "spacer",
+                height:2
+            },
+            
+            
+           /* {
+                html:'<br><b> Description de l\'activité : </b>'
+            },*/
+            {
+                xtype:'textfield',
+                label:'Description',
+                itemId:'description',
+                readOnly: true
+            },
+            {
+                xtype: "spacer",
+                height:2
+            },
+            
+            {
+                xtype: 'button',
+                id:'sportbtnjoin',
+                text: 'Joindre l\'activité',
+                /*iconCls: 'add',
+                iconMask: true,*/
+                action: 'joinActivity',
+                ui: 'action'
+                
+            }
+            
+        ]
+        
+    },
+    
+    initialize: function(){
+        this.callParent();
+        
+        //  record is visible
+        console.log("ICI : "+this.config.record);
+    }
 });

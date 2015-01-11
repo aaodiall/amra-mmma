@@ -71,7 +71,14 @@ Ext.define('Lan.view.activityMain', {
           items: [{
                 xtype: 'toolbar',
                 title: 'Mes Activités',
-                docked: 'top'
+                docked: 'top',
+                items:[{
+                        xtype: 'button',
+                        ui: 'round', 
+                        action: 'logout',
+                        text: '[->',
+                        docked:'right'
+                    }]
             },{
                 xtype: 'home'
                
@@ -81,14 +88,22 @@ Ext.define('Lan.view.activityMain', {
           title: 'Autres activités',
           leaf: true,
           slideButton: {
-                selector: 'titlebar'
+                selector: 'toolbar'
           },
             
           items: [
           {
-            xtype:'titlebar',
+            xtype:'toolbar',
             docked:'top',
-            title:'Activités'
+            title:'Activités',
+            items:[{
+                        xtype: 'button',
+                        ui: 'round', 
+                        action: 'logout',
+                        text: '[->',
+                        docked:'right'
+                    }]
+            
           },
     
           {
@@ -109,7 +124,14 @@ Ext.define('Lan.view.activityMain', {
             items: [{
                 xtype: 'toolbar',
                 title: 'Créer une activité sportive',
-                docked: 'top'
+                docked: 'top',
+                items:[{
+                        xtype: 'button',
+                        ui: 'round', 
+                        action: 'logout',
+                        text: '[->',
+                        docked:'right'
+                    }]
             },{
                 xtype: 'createsportactivity'
                
@@ -124,7 +146,14 @@ Ext.define('Lan.view.activityMain', {
             items: [{
                 xtype: 'toolbar',
                 title: 'Créer une activité culturelle',
-                docked: 'top'
+                docked: 'top',
+                items:[{
+                        xtype: 'button',
+                        ui: 'round', 
+                        action: 'logout',
+                        text: '[->',
+                        docked:'right'
+                    }]
             },{
                 xtype: 'createculturalactivity'
                
@@ -139,7 +168,14 @@ Ext.define('Lan.view.activityMain', {
             items: [{
                 xtype: 'toolbar',
                 title: 'Proposer un trajet',
-                docked: 'top'
+                docked: 'top',
+                items:[{
+                        xtype: 'button',
+                        ui: 'round', 
+                        action: 'logout',
+                        text: '[->',
+                        docked:'right'
+                    }]
             },{
                 xtype: 'createcarpoolactivity'
                
@@ -158,40 +194,21 @@ Ext.define('Lan.view.activityMain', {
             items: [{
                 xtype: 'toolbar',
                 title: 'A propos',
-                docked: 'top'
+                docked: 'top',
+                items:[{
+                        xtype: 'button',
+                        ui: 'round', 
+                        action: 'logout',
+                        text: '[->',
+                        docked:'right'
+                    }]
             },{
                 xtype: 'panel'
                
             }]
          
         },
-         {
-          title: 'Déconnexion',
-          leaf: true,
-          slideButton: {
-                selector: 'toolbar'
-            },
-            items: [{
-                xtype: 'toolbar',
-                title: 'login',
-                docked: 'top'
-            },{
-                xtype: 'login'
-               
-            }]
          
-        }
     ]
-    },
-    
-    initialize: function(){
-           this.callParent();
-
-           //  record is visible
-           //console.log("Dans le activityMain : ");
-           //if (!Ext.getComponent('sportItemId')){
-           //     console.log("Dans le IF du activityMain");
-           Ext.create('Lan.view.sportActivity');
-           // }   
-         }
+    }
 });

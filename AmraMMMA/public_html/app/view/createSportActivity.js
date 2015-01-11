@@ -17,42 +17,58 @@ Ext.define("Lan.view.createSportActivity", {
          {
             xtype: 'textfield',
             name: 'title',
-            label: 'Titre'
+            label: 'Titre',
+            labelWidth: '40%'
+
          },
          {
             xtype: 'textfield',
             name: 'date_activity',
-            label: 'Date'
+            label: 'Date',
+            labelWidth: '40%'
+
         },
         {
             xtype: 'textfield',
             name: 'start_time',
-            label: 'Heure de début'
+            label: 'Heure de début',
+            labelWidth: '40%'
+
         },
         {
             xtype: 'textfield',
             name: 'stop_time',
-            label: 'Heure de fin'
+            label: 'Heure de fin',
+            labelWidth: '40%'
+
         },
         {
             xtype: 'textfield',
             name: 'location',
-            label: 'Lieu'
+            label: 'Lieu',
+            labelWidth: '40%'
+
         },
         {
             xtype: 'textfield',
             name: 'meeting_location',
-            label: 'Lieu de rendez-vous'
+            label: 'Lieu de rendez-vous',
+            labelWidth: '40%'
+
         },
         {
             xtype: 'numberfield',
             name: 'max_number',
-            label: 'Nombre maximal de personnes'
+            label: 'Nombre maximal de personnes',
+            labelWidth: '40%'
+
         },
         {
             xtype: 'textareafield',
             name: 'description',
-            label: 'Description de l\'activite'
+            label: 'Description de l\'activite',
+            labelWidth: '40%'
+
         },
         
         //CREATE BUTTON
@@ -62,7 +78,9 @@ Ext.define("Lan.view.createSportActivity", {
             action: 'createSportActivity',
             ui: 'confirm',
             iconMask:'true',
-            height:60
+            height:'50',
+            width:'100%'
+            
         }
     ]
  }
