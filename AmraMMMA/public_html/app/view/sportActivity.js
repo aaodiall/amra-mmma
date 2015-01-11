@@ -6,7 +6,7 @@ Ext.define("Lan.view.sportActivity", {
           grouped: true,
          
           itemTpl: '<div class="myPicture">' +
-        '<img src="http://upload.wikimedia.org/wikipedia/commons/9/98/RomanA-01.svg" alt="picture" />' +
+        '<img src="http://img15.hostingpics.net/pics/15716613966994logodusport.png" height="55" width="60" alt="picture" />' +
         '</div>' +
         '<div class="myContent">'+
         '<div><b>Activité : </b>{title}<br>'+

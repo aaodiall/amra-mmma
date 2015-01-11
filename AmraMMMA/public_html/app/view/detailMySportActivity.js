@@ -34,8 +34,8 @@ Ext.define("Lan.view.detailMySportActivity", {
             },*/
             {
                 xtype:'textfield',
-                label:'organisateur',
-                itemId:'iduser',
+                label:'Titre de l\'activité',
+                itemId:'title',
                 readOnly: true
                 
             },
@@ -44,6 +44,28 @@ Ext.define("Lan.view.detailMySportActivity", {
                 height:2
             },
             
+                        {
+                xtype:'textfield',
+                label:'Date de l\'activité',
+                itemId:'date_activity',
+                readOnly: true
+                
+            },
+            {
+                xtype: "spacer",
+                height:2
+            },
+            {
+                xtype:'textfield',
+                label:'Lieu de rendez-vous',
+                itemId:'meeting_location',
+                readOnly: true
+                
+            },
+            {
+                xtype: "spacer",
+                height:1
+            },
             
            /* {
                 html:'<br><b> Heure de debut de l\'activité : </b>'
